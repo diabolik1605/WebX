@@ -35,6 +35,7 @@
       position:relative
     }
     
+    /*--- DOCK ICONS 42PX ---*/
 	  .iIcon {
       width: 42px;
       height: 42px;
@@ -86,6 +87,7 @@
       box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.4);
 	  }
 	  
+	  /*--- MENUBAR ---*/
     #menubar {
       background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.6)), color-stop(100%,rgba(0, 0, 0, 0.6)));
@@ -96,6 +98,7 @@
       box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
     }
     
+    /*--- MENUBAR PANELS ---*/
     .mbWindow {
       background: rgba(0,0,0,0.4);
       border-right: 1px solid rgba(0,0,0,0.6);
@@ -112,10 +115,7 @@
       box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
     }
     
-    #dockBG {
-      transform: scale(1) rotateX(50deg) rotateY(0deg) translate(0px, 0px) skew(0deg, 0deg) scaleZ(1.0) rotateZ(0deg) translateZ(0px) ; transform-origin: 0% 0%
-    }
-    
+    /*--- WINDOWS ---*/
     .wxWindow {
     	width:350px;
     	height:250px;
@@ -132,6 +132,13 @@
       -moz-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
       box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
     	z-index:10;
+    }
+    
+    /*--- WINDOW TYPE APP ---*/
+    .wxWindow_app {
+      -webkit-border-radius: 4px 4px 0px 0px;
+      -moz-border-radius: 4px 4px 0px 0px;
+      border-radius: 4px 4px 0px 0px;
     }
     
     .wxWindow_top {
@@ -269,6 +276,11 @@
     	-webkit-border-radius: 0px 0px 4px 4px;
     	-moz-border-radius: 0px 0px 4px 4px;
     	border-radius: 0px 0px 4px 4px;
+    }
+    
+    /*--- WINDOW TYPE APP FOOTER ---*/
+    .wxWindow_app .wxWindow_footer {
+      display: none;
     }
     
     #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }

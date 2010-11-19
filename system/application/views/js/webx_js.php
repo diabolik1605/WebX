@@ -575,30 +575,27 @@ WebX.Create.prototype.dashboard = function () {
 
 WebX.Create.prototype.window = function (type, width, height, id, title, content) {
   var wx_window = $('<div/>', {
-    className: "wxWindow",
+    className: "wxWindow wxWindow_" + type,
     id: id,
     css: {
       "width": width + "px",
-      "height": height + "px"
+      "height": height + "px",
+      "display": "none"
     }
   }).appendTo("#webxWrapper");
   
   $(wx_window).data('windowType',type);
+  $(wx_window).data('windowState','expanded');
   switch(type){
     case "finder":
-      $(wx_window).data('windowState','open');
       break;
     case "settings":
-      $(wx_window).data('windowState','open');
       break;
     case "utility":
-      $(wx_window).data('windowState','open');
       break;
     case "app":
-      $(wx_window).data('windowState','open');
       break;
     default:
-      $(wx_window).data('windowState','open');
       break;
   }
 
@@ -623,8 +620,9 @@ WebX.Create.prototype.window = function (type, width, height, id, title, content
   // Close Button
   $('<div/>', {
     className: "button close",
-    click: function () {
+    click: function() {
       wxCloseWindow(wx_window);
+      return false;
     },
     mouseover: function () {
       $(this).html("x");
@@ -651,7 +649,7 @@ WebX.Create.prototype.window = function (type, width, height, id, title, content
   // Maximize Button
   $('<div/>', {
     className: "button maximize",
-    click: function () {
+    click: function() {
       wxMaximizeWindow(wx_window);
       return false;
     },
@@ -682,21 +680,23 @@ WebX.Create.prototype.window = function (type, width, height, id, title, content
   $('<div/>', {
     className: "wxWindow_top_toolbar"
   }).appendTo(wx_window_top_wrapper);
-
-  // bottom bar
-  var wx_window_bottom = $('<div/>', {
-    className: "wxWindow_footer"
-  }).appendTo(wx_window);
   
-  $('<div/>', {
-    className: "wxWindow_footer_wrapper"
-  }).appendTo(wx_window_bottom);
+  // bottom bar
+  if(type !== 'app') {
+   var wx_window_bottom = $('<div/>', {
+     className: "wxWindow_footer"
+   }).appendTo(wx_window);
+   
+   $('<div/>', {
+     className: "wxWindow_footer_wrapper"
+   }).appendTo(wx_window_bottom); 
+  }
 
   // middle content
   var wx_window_content = $('<div/>', {
     className: "wxWindow_body resize_me",
     css: {
-      "height": ($(wx_window).outerHeight(false) - 60 - 27) + "px"
+      "height": ($(wx_window).outerHeight(false) - 60 - ((type !== 'app') ? 27 : 3)) + "px"
     }
   }).appendTo(wx_window);
   
@@ -709,20 +709,28 @@ WebX.Create.prototype.window = function (type, width, height, id, title, content
   }).appendTo(wx_window_content);
   
   // Sidebar
-  var wxWindow_body_sidebar = $('<div/>', {
-    className: "wxWindow_body_sidebar",
-    css: {
-      "height": "100%"
-    }
-  }).appendTo(wx_window_body_wrapper);
+  if(type === 'finder') {
+    var wxWindow_body_sidebar = $('<div/>', {
+      className: "wxWindow_body_sidebar",
+      css: {
+        "height": "100%"
+      }
+    }).appendTo(wx_window_body_wrapper);
+  }
   
   // Body Content
+  var window_body_width_modifier;
+  if(type === 'finder') {
+    window_body_width_modifier = 136;
+  } else {
+    window_body_width_modifier = 0;
+  }
   var wxWindow_body_content = $('<div/>', {
     className: "wxWindow_body_content",
     css: {
-      "width": ($(wx_window_content).outerWidth(false) - 136) + "px",
+      "width": (width - window_body_width_modifier) + "px",
       "height": "100%",
-      "left": "136px"
+      "left": window_body_width_modifier + "px"
     },
     html: content
   }).appendTo(wx_window_body_wrapper);
@@ -751,7 +759,7 @@ WebX.Create.prototype.window = function (type, width, height, id, title, content
     handles: "se",
     resize: function(event, ui) {
       $(ui.element).find('.wxWindow_body_content').css({
-        "width": ($(ui.element).outerWidth(false) - 138) + "px"
+        "width": ($(ui.element).outerWidth(false) - (($(ui.element).find('.wxWindow_body_sidebar').length !== 0) ? $(ui.element).find('.wxWindow_body_sidebar').outerWidth(false)+1 : 0)) + "px"
       });
     }
   });
@@ -807,6 +815,15 @@ function initClock() {
 }
 
 function wxMaximizeWindow(ele) {
+  var width_modifier;
+  var height_modifier;
+  if($(ele).data('windowType') === 'finder'){
+    width_modifier =136;
+    height_modifier = 27;
+  } else {
+    width_modifier = 0;
+    height_modifier = 0;
+  }
   var browser_size = getDimensions(document.getElementsByTagName('body')[0]);
   if (!$(ele).data('sizeState') || $(ele).data('sizeState') !== "max") {
     var eleSize = getDimensions($(ele));
@@ -823,16 +840,16 @@ function wxMaximizeWindow(ele) {
       "width": browser_size.width + "px",
       "height": browser_size.height - $('#menubar').outerHeight(true) + "px",
       "top": $('#menubar').outerHeight(true) + "px",
-      "left": 0
+      "left": width_modifier + "px"
     });
     $(ele).find('.wxWindow_body').css({
       "width": "100%",
-      "height": ($(ele).outerHeight(false) - 60 - 27) + "px"
+      "height": ($(ele).outerHeight(false) - 60 - height_modifier) + "px"
     });
     $(ele).find('.wxWindow_body_content').css({
-      "width": ($(ele).find('.wxWindow_body_wrapper').outerWidth(false) - 136) + "px",
+      "width": ($(ele).find('.wxWindow_body_wrapper').outerWidth(false) - width_modifier) + "px",
       "height": "100%",
-      "left": "136px"
+      "left": width_modifier + "px"
     });
     $(ele).data('sizeState', "max");
   } else {
@@ -844,12 +861,12 @@ function wxMaximizeWindow(ele) {
     });
     $(ele).find('.wxWindow_body').css({
       "width": "100%",
-      "height": ($(ele).data('originalHeight') - 60 - 25) + "px"
+      "height": ($(ele).data('originalHeight') - 60 - (($(ele).data('windowType') === 'finder') ? height_modifier - 2 : height_modifier)) + "px"
     });
     $(ele).find('.wxWindow_body_content').css({
-      "width": ($(ele).find('.wxWindow_body_wrapper').outerWidth(false) - 136) + "px",
+      "width": ($(ele).find('.wxWindow_body_wrapper').outerWidth(false) - width_modifier) + "px",
       "height": "100%",
-      "left": "136px"
+      "left": width_modifier + "px"
     });
     $(ele).data('sizeState', "min");
   }
@@ -888,7 +905,7 @@ function wxWindowToggle(ele) {
     case 'Settings':
       window_title = 'Settings';
       window_content = 'Settings will go here.';
-      window_type = 'finder';
+      window_type = 'app';
       break;
     default:
       window_title = 'Title';
@@ -897,6 +914,7 @@ function wxWindowToggle(ele) {
       break;
     }
     WebX.create.window(window_type, 357, 287, ele.replace('#', ''), window_title, window_content);
+    $(ele).fadeIn(420);
   } else if ($(ele).is(':visible')) {
     wxCloseWindow(ele);
   } else if (!$(ele).is(':visible')) {
@@ -1003,7 +1021,7 @@ switch($(ele).data('windowType')) {
     default:
       break;
   }
-  $(ele).data('windowState', 'open');
+  $(ele).data('windowState', 'expanded');
 }
 
 function wxWindowPillContract(ele) {
@@ -1085,11 +1103,11 @@ function wxWindowPillContract(ele) {
     default:
       break;
   }
-  $(ele).data('windowState', 'closed');
+  $(ele).data('windowState', 'contracted');
 }
 
 function wxWindowPillToggle(ele) {
-  if($(ele).data('windowState') === 'open'){
+  if($(ele).data('windowState') === 'expanded'){
     wxWindowPillContract(ele);
   } else {
     wxWindowPillExpand(ele);
