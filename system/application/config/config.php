@@ -18,7 +18,6 @@ $config['fb_secret'] = 'adda6352907259fa99bab551207f5ca9';
 |
 */
 $config['base_url']	= "http://localhost:8888/webx.ipwn.me/";
-#$config['base_url']	= "http://lp01vm.digisynd.com:5001/webx.ipwn.me/";
 
 /*
 |--------------------------------------------------------------------------
