@@ -37,10 +37,9 @@
 $active_group = "default";
 $active_record = TRUE;
 
-#$db['default']['hostname'] = "matrix.webx.ipwn.me";
 $db['default']['hostname'] = "localhost:8889";
-$db['default']['username'] = "highjinx";
-$db['default']['password'] = "kottonmouth";
+$db['default']['username'] = "";
+$db['default']['password'] = "";
 $db['default']['database'] = "webx_db";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";
