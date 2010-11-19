@@ -38,8 +38,8 @@ $active_group = "default";
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost:8889";
-$db['default']['username'] = "";
-$db['default']['password'] = "";
+$db['default']['username'] = "root";
+$db['default']['password'] = "root";
 $db['default']['database'] = "webx_db";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";
