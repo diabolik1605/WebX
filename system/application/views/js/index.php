@@ -409,7 +409,6 @@
     	float:left;
     	display:block;
     	height:100%;
-    	border:1px solid red;
     	margin:0 6px;
     	padding:0;
     	position:relative;
