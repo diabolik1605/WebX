@@ -361,45 +361,58 @@
     #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
     
     /*--- DOCK ---*/
-    #theDock {
-      border-collapse: collapse;
-      height: 58px;
-      border-spacing: 0;
-      bottom: 0;
-      z-index: 999;
-      position: absolute;
-      text-align: center;
-      display: block;
-      margin-bottom: 0px;
-      left: 50%;
-      visibility: visible;
+    #wxDock {
+    	height:58px;
+    	position:absolute;
+    	bottom:0;
+    	margin:0 0 0 50px;
+    	padding:0;
+    	left: 50%;
+    	z-index: 999;
     }
     
-    td.dock_left {
-      width: 25px;
-      height: 58px;
-      background: url("<?=$base_url?>assets/imgs/dock/dock_ends.png") no-repeat 0 0;
-    }
-
-    td.dock_c {
-      height: 58px;
-      background: url("<?=$base_url?>assets/imgs/dock/dock_02.png") repeat-x 0 0;
+    #wxDock_wrapper {
+    	position:relative;
+    	width:100%;
+    	height:100%;
+    	margin:0;
+    	padding:0;
     }
     
-    td.dock_right {
-      width: 25px;
+    #wxDock_left {
+    	position:absolute;
+    	top:0;
+    	left:-25px;
+    	width: 25px;
       height: 58px;
-      background: url("<?=$base_url?>assets/imgs/dock/dock_ends.png") no-repeat -25px 0;
+      background: url("<?=base_url()?>assets/imgs/dock/dock_ends.png") no-repeat 0 0;
     }
     
-    .wx_dock_item {
-    	width: 42px;
-    	height: 42px;
-    	margin: 0 6px 13px;
-    	padding: 0;
-    	list-style-type: none;
-    	float: left;
-    	position: relative;
+    #wxDock_right {
+    	position:absolute;
+    	top:0px;
+    	right: -25px;
+    	width: 25px;
+      height: 58px;
+      background: url("<?=base_url()?>assets/imgs/dock/dock_ends.png") no-repeat -25px 0;
+    }
+    
+    #wxDock_ul {
+    	list-style-type:none;
+    	padding:0 4px;
+    	margin:0;
+    	height:100%;
+    	background: url("<?=base_url()?>assets/imgs/dock/dock_02.png") repeat-x 0 0;
+    }
+    
+    #wxDock_ul li {
+    	float:left;
+    	display:block;
+    	height:100%;
+    	border:1px solid red;
+    	margin:0 6px;
+    	padding:0;
+    	position:relative;
     }
     
     #dock_Dashboard {

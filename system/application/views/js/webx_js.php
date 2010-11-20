@@ -248,74 +248,28 @@ WebX.Create.prototype.menubar = function () {
 };
 
 WebX.Create.prototype.dock = function () {
-  var theDock = $('<table>', {
-    id: "theDock"
-  }).appendTo('#webxWrapper');
 
-  var tBody = $('<tbody>').appendTo(theDock);
-  var tRow = $('<tr>').appendTo(tBody);
-  var td_left = $('<td>', {
-    className: "dock_left"
-  }).appendTo(tRow);
-
-  var td_center = $('<td>', {
-    className: "dock_c"
-  }).appendTo(tRow);
-
-  var td_center_ul = $('<ul>', {
-    css: {
-      'margin': '0 0 -2px 0',
-      'padding': 0
-    }
-  }).appendTo(td_center);
-
-  var td_right = $('<td>', {
-    className: "dock_right"
-  }).appendTo(tRow);
+  var theDock = $('<div/>', { id: "wxDock" }).appendTo('#webxWrapper');
+  var theDock_wrapper = $('<div/>', { id: "wxDock_wrapper" }).appendTo(theDock);
+  
+  var dock_left = $('<div/>', { id: "wxDock_left" }).appendTo(theDock_wrapper);
+  var dock_content = $('<ul/>', { id: "wxDock_ul" }).appendTo(theDock_wrapper);
+  var dock_right = $('<div/>', { id: "wxDock_right" }).appendTo(theDock_wrapper);
 
   webx_data.dock.items.forEach(function (obj) {
-    var icon = $('<li>', {
-      className: 'wx_dock_item'
-    }).appendTo(td_center_ul);
-
-    var icon_link = $('<a>', {
-      href: "#nf",
-      id: webx_data.dock[obj].name + "_Dlink",
-      rel: webx_data.dock[obj].name,
-      css: {
-        "cursor": "default"
-      },
-      click: function (e) {
-        e.preventDefault();
-        return false;
-      }
-    }).appendTo(icon);
-
-    // var icon_image = $('<img/>', {
-    //     src: webx_data.dock[obj].img_src,
-    //     className: 'icon',
-    //     title: '',
-    //     alt: webx_data.dock[obj].name,
-    //     css: {
-    //         'width' : '48px',
-    //         'height' : '48px',
-    //         'display' : 'inline',
-    //         'margin' : '0 4px 4px',
-    //         'border' : 0
-    //     }
-    // }).appendTo(icon_link);
-    // iPhone like icons
-    // <div class="twitter iIcon">
-    //     <div class="iGloss"></div>
-    // </div>
-    
-    var icon_div = $('<div/>', {
-      className: 'iIcon dockIcon',
-      id: 'dock_' + webx_data.dock[obj].name,
+  
+    var dock_item = $('<li>', {
+      className: 'wxDock_item',
+      id: 'wxDock_item_' + webx_data.dock[obj].name,
       data: {
         "name": webx_data.dock[obj].name
       }
-    }).appendTo(icon_link);
+    }).appendTo(dock_content);
+    
+    var icon_div = $('<div/>', {
+      className: 'iIcon dockIcon',
+      id: 'dock_' + webx_data.dock[obj].name
+    }).appendTo(dock_item);
 
     var icon_gloss = $('<div/>', {
       className: "iGloss"
@@ -333,70 +287,46 @@ WebX.Create.prototype.dock = function () {
         return false;
       });
     }
-
   });
 
-  var dockTip_wrapper = $('<div>', {
-    id: "webxDockTips"
-  }).appendTo('#theDock');
-
   // center the dock in the middle of the browser
-  var dockWidth = getDimensions($('#theDock')).width;
-  $('#theDock').css({
+  var dockWidth = getDimensions($('#wxDock')).width;
+  $('#wxDock').css({
     "marginLeft": -(dockWidth / 2) + "px"
   });
 
   // build a title tip for each link in dock
-  $("#theDock a").each(function () {
-    var linkRel = $(this).attr("rel");
-    var thisLinkID = linkRel + "_Dlink";
-    var tipID = linkRel + "TIP";
-    var tipLoc = document.getElementById(thisLinkID);
-    xPos = tipLoc.offsetLeft;
-    tempEl = tipLoc.offsetParent;
-    while (tempEl != null) {
-      xPos += tempEl.offsetLeft;
-      tempEl = tempEl.offsetParent;
-    }
-
-    $(this).find(".iIcon").each(function () {
-      var tipText = $(this).data("name");
-      theTip = WebX.create.dockTip(tipID, tipText);
-      
-      $(this).parent().parent().append(theTip);
-
-      tipWidth = $("div#" + tipID).width();
-      tipPos = (tipWidth / 2);
-      
-      $("div#" + tipID).css({
-        "margin-left": '-' + tipPos + "px"
-      }).hide();
-    });
+  $(".wxDock_item").each(function () {
+    var icon_name = $(this).data('name');
+    var tip_id = 'wxDock_tip_' + icon_name;
+    var theTip = WebX.create.dockTip(tip_id, icon_name);
     
-    $(this).bind("mouseover", function (e) {
-      $('div#' + tipID).show();
-    }).bind("mouseout", function (e) {
-      $('div#' + tipID).fadeOut('210');
+    $(this).append(theTip);
+
+    var tipWidth = $("div#" + tip_id).width();
+    var tipPos = (tipWidth / 2);
+    
+    $("div#" + tip_id).css({
+      "margin-left": '-' + tipPos + "px"
+    }).hide();
+    
+    $(this).bind("mouseover", function () {
+      $('div#' + tip_id).show();
+    }).bind("mouseout", function () {
+      $('div#' + tip_id).fadeOut('210');
     });
     
   }); // end a each function
-  
-  var center_width = dockWidth - getDimensions($('#theDock').find('.dock_right')).width - getDimensions($('#theDock').find('.dock_left')).width;
-
-  $(td_center).css({
-    width: center_width + "px"
-  });
 
   // make sortable
-  $(td_center_ul).sortable({
-    placeholder: "blank_dock_icon",
+  $(dock_content).sortable({
     axis: "x",
     update: function (event, ui) {
-      console.log(event);
-      console.log(ui);
+      // console.log(event);
+      // console.log(ui);
     }
   });
-  $(td_center_ul).disableSelection();
+  $(dock_content).disableSelection();
 };
 
 WebX.Create.prototype.dockTip = function (tipID, tipText) {
@@ -787,23 +717,23 @@ function wxWindowToggle(ele) {
 }
 
 function wxDockClose() {
-  $('#theDock').animate({
+  $('#wxDock').animate({
     'margin-bottom': '-58px'
   }, 420, 'easeOutExpo', function () {
-    $('#theDock').data('state', 'closed');
+    $('#wxDock').data('state', 'closed');
   });
 }
 
 function wxDockOpen() {
-  $('#theDock').animate({
+  $('#wxDock').animate({
     'margin-bottom': '0px'
   }, 420, 'easeOutExpo', function () {
-    $('#theDock').data('state', 'open');
+    $('#wxDock').data('state', 'open');
   });
 }
 
 function wxDockToggle() {
-  if ($('#theDock').css('margin-bottom') === '0px') {
+  if ($('#wxDock').css('margin-bottom') === '0px') {
     wxDockClose();
   } else {
     wxDockOpen();
