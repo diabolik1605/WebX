@@ -45,10 +45,11 @@
       background: #fff;
       float: left;
       margin: 0px auto;
-      -webkit-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-      -moz-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+      -webkit-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
+      -moz-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
+      box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
       position:relative;
+      -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.7, transparent), to(rgba(255,255,255,0.5)));
 	  }
 	  
 	  .iIcon img {
@@ -89,6 +90,11 @@
 	  
 	  /*--- MENUBAR ---*/
     #menubar {
+      top: 0;
+      width: 100%;
+      height: 30px;
+      position: relative;
+      z-index: 999;
       background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.6)), color-stop(100%,rgba(0, 0, 0, 0.6)));
       background: rgba(0, 0, 0, 0.6);
@@ -96,6 +102,59 @@
       -webkit-box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
       -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
       box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
+    }
+    
+    #menubar ul {
+      height: 30px;
+      margin: 0 0 0 13px;
+      padding: 0;
+    }
+    
+    #menubar ul li {
+      float: left;
+      list-style-type: none;
+      margin: 5px 8px 0px 8px;
+      padding: 0;
+      cursor: default;
+    }
+    
+    #mb_user_area {
+      float: right;
+      list-style-type: none;
+      margin: 2px 16px 0px 8px;
+      padding: 0;
+      font: 9px/9px Geneva, "Myriad Pro", helvetica;
+      position: relative;
+    }
+    
+    #wx_mb_clock {
+      position: absolute;
+      top: 14px;
+      right: 30px;
+      text-align: right;
+      min-width: 220px;
+      max-width: 250px;
+    }
+    
+    #wx_mb_user_name {
+      position: absolute;
+      top: 2px;
+      right: 30px;
+      text-align: right;
+      min-width: 180px;
+      max-width: 220px;
+    }
+    
+    #wx_mb_user_pic {
+      width: 22px;
+      height: 22px;
+      float: right;
+      border: 1px solid rgba(0,0,0,0.7);
+      display: block;
+      position: absolute;
+      top: 2px;
+      right: 0;
+      background: url(<?=base_url()?>assets/imgs/menubar/default_user.png) no-repeat;
     }
     
     /*--- MENUBAR PANELS ---*/
@@ -113,6 +172,22 @@
       -webkit-box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
       -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
       box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
+      display: none;
+      width: 140px;
+      position: absolute;
+      z-index: 998;
+    }
+    
+    .mbWindow ul {
+      list-style-type: none;
+      padding: 10px 16px;
+      margin: 0;
+    }
+    
+    .mbWindow ul li {
+      color: #ffffff;
+      cursor: default;
+      padding: 0 0 4px 0;
     }
     
     /*--- WINDOWS ---*/
@@ -154,9 +229,9 @@
     .wxWindow_top_wrapper {
     	width:100%;
     	height:100px;
-    	-webkit-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.7);
-    	-moz-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.7);
-    	box-shadow: inset 0px 5px 30px rgba(255,255,255,0.7);
+    	-webkit-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
+    	-moz-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
+    	box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
     	margin:0 auto 0px;
     	-webkit-border-radius: 4px 4px 0px 0px;
     	-moz-border-radius: 4px 4px 0px 0px;
@@ -269,9 +344,9 @@
     .wxWindow_footer_wrapper {
     	width:100%;
     	height:46px;
-    	-webkit-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.4);
-    	-moz-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.4);
-    	box-shadow: inset 0px 1px 30px rgba(255,255,255,0.4);
+    	-webkit-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
+    	-moz-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
+    	box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
     	margin:-23px auto 0px;
     	-webkit-border-radius: 0px 0px 4px 4px;
     	-moz-border-radius: 0px 0px 4px 4px;
@@ -284,6 +359,38 @@
     }
     
     #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+    
+    /*--- DOCK ---*/
+    #theDock {
+      border-collapse: collapse;
+      height: 58px;
+      border-spacing: 0;
+      bottom: 0;
+      z-index: 999;
+      position: absolute;
+      text-align: center;
+      display: block;
+      margin-bottom: 0px;
+      left: 50%;
+      visibility: visible;
+    }
+    
+    td.dock_left {
+      width: 25px;
+      height: 58px;
+      background: url("<?=$base_url?>assets/imgs/dock/dock_ends.png") no-repeat 0 0;
+    }
+
+    td.dock_c {
+      height: 58px;
+      background: url("<?=$base_url?>assets/imgs/dock/dock_02.png") repeat-x 0 0;
+    }
+    
+    td.dock_right {
+      width: 25px;
+      height: 58px;
+      background: url("<?=$base_url?>assets/imgs/dock/dock_ends.png") no-repeat -25px 0;
+    }
     
     .wx_dock_item {
     	width: 42px;
@@ -311,6 +418,22 @@
       background: url("<?=base_url()?>assets/imgs/dock/dock_sprite.png") 0 -42px no-repeat;
     }
     
+    /*--- DOCK TIPS---*/
+    .wxTip {
+      border: 0
+      display: block;
+      border-collapse: collapse;
+      border-spacing: 0;
+      position: absolute;
+      z-index: 999;
+      height: 26px;
+      bottom: 62px;
+      padding: 0;
+      top: -34px;
+      left: 50%;
+      
+    }
+    
     .wxTipText {
       -webkit-border-radius: 20px;
       -moz-border-radius: 20px;
@@ -327,7 +450,7 @@
       border-color:rgba(30, 30, 30, 0.85) transparent;
       border-style:solid;
       border-width:6px 6px 0;
-      bottom:1px;
+      bottom:0px;
       content:"";
       display:block;
       height:0;
@@ -335,6 +458,47 @@
       width:0;
       left:50%;
       margin-left: -5px;
+    }
+    
+    /*--- DASHBOARD ---*/
+    #dashboardPanel {
+      width: 100%;
+      height: 118px;
+      background: url("<?=$base_url?>assets/imgs/dashboard/dashBack.gif") repeat-x;
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #dbOverlay {
+      display: none;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.58);
+      border: 0;
+      z-index: 1000;
+    }
+    
+    #dbDrawerButton {
+      width: 36px;
+      height: 36px;
+      background: url("<?=$base_url?>assets/imgs/dashboard/widgetDrawer.png") no-repeat 0 0;
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+    }
+    
+    #dbManageButton {
+      width: 137px;
+      height: 36px;
+      background: url("<?=$base_url?>assets/imgs/dashboard/manage.png") no-repeat 0 0;
+      position: absolute;
+      bottom: 8px;
+      left: 80px;
     }
     
   </style>
@@ -350,7 +514,7 @@
       <p  style="margin-top:35px;cursor:default;">Click Me to start</p>
     </div>
     <div>
-    	<img id="wallpaper" src="<?=base_url()?>assets/imgs/WebXWallpaperOfficial.png" alt="" title="" />
+    	<img id="wallpaper" src="<?=base_url()?>assets/imgs/wallpaper/Vitrieth_by_iumazark.jpg" alt="" title="" />
     </div>
   </div>
 </body>
