@@ -106,9 +106,14 @@
     #menubar ul li {
       float: left;
       list-style-type: none;
-      margin: 5px 8px 0px 8px;
-      padding: 0;
+      padding: 6px 8px;
+      margin: 0;
       cursor: default;
+    }
+    
+    #menubar ul li:hover {
+      background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.4)), color-stop(100%,rgba(0, 0, 0, 0.4)));
     }
     
     #mb_user_area {
@@ -173,14 +178,21 @@
     
     .mbWindow ul {
       list-style-type: none;
-      padding: 10px 16px;
+      padding: 6px 0px 4px;
       margin: 0;
     }
     
     .mbWindow ul li {
       color: #ffffff;
       cursor: default;
-      padding: 0 0 4px 0;
+      padding: 0px 16px;
+      margin-bottom: 2px;
+    }
+    
+    .mbWindow ul li:hover {
+      color: #ffffff;
+      background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.4)), color-stop(100%,rgba(0, 0, 0, 0.4)));
     }
     
     /*--- WINDOWS ---*/
@@ -429,9 +441,8 @@
       position: absolute;
       z-index: 999;
       height: 26px;
-      bottom: 62px;
       padding: 0;
-      top: -34px;
+      top: -32px;
       left: 50%;
       
     }
@@ -452,11 +463,11 @@
     .wxTipText:after {
       border-color:rgba(30, 30, 30, 0.68) transparent;
       border-style:solid;
-      border-width:6px 6px 0;
-      bottom:0px;
+      border-width:5px 5px 0;
+      bottom:-1px;
       content:"";
       display:block;
-      height:0;
+      height:2px;
       position:absolute;
       width:0;
       left:50%;
@@ -503,3 +514,22 @@
       bottom: 8px;
       left: 80px;
     }
+    
+    /*--- MISC BUTTONS ---*/
+    .wxButton_toggle {
+    	width:50px;
+    	height:16px;
+    	margin:0;
+    	padding:0;
+    	-webkit-border-radius: 4px;
+    	-moz-border-radius: 4px;
+    	border-radius: 4px;
+    	overflow:none;
+    	border:1px solid #828282;
+    }
+    .wxButton_toggle_square {
+    	width:50;
+    	height:16px;
+    	background: url("<?=$base_url?>assets/imgs/buttons/toggle_button.png") -28px 0 no-repeat;
+    }
+    
