@@ -419,6 +419,19 @@
     	position:relative;
     }
     
+    #wxDock_ul li div.wxTip {
+      display:none;
+    }
+    
+    #wxDock_ul li div.moving,
+    #wxDock_ul li:hover div.moving {
+      display:none !important;
+    }
+    
+    #wxDock_ul li:hover div.wxTip {
+      display:block;
+    }
+    
     #dock_Dashboard {
       background: url("<?=base_url()?>assets/imgs/dock/dock_sprite.png") 0 0 no-repeat;
     }

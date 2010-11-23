@@ -1,0 +1,195 @@
+<style type="text/css">
+.wxBrowser_nav {
+	position:relative;
+	border:1px solid red;
+	background:#ddd;
+	height:30.5px;
+	padding:8px 0 0 0;
+	width:500px;
+}
+
+.wxBrowser_nav div,
+.wxBrowser_nav form {
+	background:#fcfcfc;
+	background: -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	border:1px solid #545454;
+	position:absolute;
+}
+
+.wxBrowser_nav div {
+	text-align:center;
+}
+
+.wxBrowser_button_back {
+	width:30px;
+	height:30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	top:3px;
+	left:7px;
+	z-index:11;
+}
+
+.wxBrowser_button_forward {
+	width:28px;
+	height:20px;
+	-moz-border-radius: 0px 20px 20px 0px;
+	border-radius: 0px 20px 20px 0px;
+	position:absolute;
+	left:35px;
+	z-index:10;
+}
+.wxBrowser_button_home {
+	width:34px;
+	height:20px;
+	border:1px solid #545454;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	left:71px;
+	z-index:10;
+}
+.wxBrowser_button_refresh {
+	width:34px;
+	height:20px;
+	border:1px solid #545454;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	left:404px;
+	z-index:10;
+}
+.wxBrowser_button_stop {
+	width:34px;
+	height:20px;
+	border:1px solid #545454;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	left:448px;
+	z-index:10;
+}
+.wxBrowser_url_field {
+	height:20px;
+	border:1px solid #545454;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	padding:0px 0px 0px 30px;
+	left:114px;
+	z-index:10;
+	width:250px;
+}
+
+.wxBrowser_url_field input {
+	padding:0px 10px;
+	margin:0;
+	height:20px;
+	width:100%;
+	-moz-border-radius: 20px;
+	border-radius: 20px 20px 20px 20px;
+	border:0;
+	-webkit-box-shadow: inset 0px 1px 2px #000000;
+	-moz-box-shadow: inset 0px 1px 2px #000000;
+	box-shadow: inset 0px 1px 2px #000000;
+}
+.wxBrowser_loader {
+	background:transparent;
+	width:16px;
+	height:11px;
+	border:0px!important;
+	position:absolute;
+	left:8px;
+	top:4px;
+}
+
+.wxBrowser_iframe {
+	frameborder:0;
+	border:1px solid red;
+	width:500px;
+	height:300px;
+	margin-top:8px;
+	scrolling:auto;
+}
+</style>
+
+<script type="text/javascript" src="http://webx.ipwn.me/assets/js/jquery-1.4.3.js"></script>
+<script type="text/javascript">
+	function isUrl(s) {
+		var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+		return regexp.test(s);
+	}
+
+	$(document).ready(function(){
+		/*--- Browser ---*/
+		$('.wxBrowser').each(function(){
+			var browser_name = $(this).attr('id').replace('wxBrowser_','');
+			var wxIframe = "#wxBrowser_iframe_" + browser_name;
+			var url_field = $(this).find('form').find('input');
+			var browser_loader = $(this).find('.wxBrowser_loader');
+			browser_loader.hide();
+			$(wxIframe).data({"history": ["http://google.com"], "home": "http://webx.ipwn.me"});
+			$(url_field).attr({'value': $(wxIframe).attr('src')});
+			$(this).find('.wxBrowser_button_back').bind('click', function(e){
+				console.log(browser_name + ' back button clicked');
+				var history = $(wxIframe).data('history');
+				$(wxIframe).attr({'src': (history.length - 1 !== 0) ? history[history.length-1] : history[0] });
+				$(url_field).attr({'value': $(wxIframe).attr('src')});
+				return false;
+			});
+			$(this).find('.wxBrowser_button_forward').bind('click', function(e){
+				console.log(browser_name + ' forward button clicked');
+				return false;
+			});
+			$(this).find('.wxBrowser_button_home').bind('click', function(e){
+				console.log(browser_name + ' home button clicked');
+				var history = $(wxIframe).data('history');
+				history[history.length] = $(wxIframe).data('home');
+				$(wxIframe).attr({'src': $(wxIframe).data('home') }).data({ "history": history });
+				$(url_field).attr({'value': $(wxIframe).attr('src')});
+				return false;
+			});
+			$(this).find('.wxBrowser_button_refresh').bind('click', function(e){
+				console.log(browser_name + ' refresh button clicked');
+				return false;
+			});
+			$(this).find('.wxBrowser_button_stop').bind('click', function(e){
+				console.log(browser_name + ' stop button clicked');
+				return false;
+			});
+			$(this).find('.wxBrowser_url_field').bind('submit', function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				var wxIframe_source = $(this).find('input').val();
+				if(isUrl(wxIframe_source)){
+					var history = $(wxIframe).data('history');
+					history[history.length] = wxIframe_source;
+					browser_loader.show();
+					$(wxIframe).attr({'src': wxIframe_source }).data({ "history": history }).bind('load', function(){ browser_loader.hide(); });
+				} else {
+					if(wxIframe_source.match(' ')) {
+						browser_loader.show();
+						$(wxIframe).attr({'src': 'http://www.google.com/search?hl=en&q='+ wxIframe_source.replace(' ','+') +'&btnI=I%27m+Feeling+Lucky'}).bind('load', function(){ browser_loader.hide(); });
+						$(url_field).attr({'value': $(wxIframe).attr('src')});
+					} else {
+						var history = $(wxIframe).data('history');
+						history[history.length] = $(wxIframe).data('home');
+						browser_loader.show();
+						$(wxIframe).attr({'src': $(wxIframe).data('home') }).data({ "history": history }).bind('load', function(){ browser_loader.hide(); });
+						$(url_field).attr({'value': $(wxIframe).attr('src')});
+						console.log(history);
+					}
+				}
+			});
+		});
+	});
+</script>
+
+<div class="wxBrowser" id="wxBrowser_test">
+<div class="wxBrowser_nav">
+	<div class="wxBrowser_button_back">&#60;</div>
+	<div class="wxBrowser_button_forward">&#62;</div>
+	<div class="wxBrowser_button_home">&#94;</div>
+	<form class="wxBrowser_url_field" id="wxBrowser_form_test"><div class="wxBrowser_loader"><img src="http://webx.ipwn.me/assets/imgs/loaders/browser_loader.gif" /></div><input type="text"/></form>
+	<div class="wxBrowser_button_refresh">R</div>
+	<div class="wxBrowser_button_stop">X</div>
+</div>
+<iframe class="wxBrowser_iframe" id="wxBrowser_iframe_test" src="http://google.com"></iframe>
+</div>
