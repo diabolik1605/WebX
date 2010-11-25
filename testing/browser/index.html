@@ -1,9 +1,47 @@
 <style type="text/css">
+.wxBrowser {
+	position:absolute;
+	top:35px;
+	left:35px;
+	padding:0;
+	margin:0;
+	border:1px solid rgba(155,155,155,1);
+	border-radius: 4px 4px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+	z-index:10;
+}
+
+.wxBrowser_top {
+	width:100%;
+	height:60px;
+	position:relative;
+	background:#fcfcfc;
+	background: -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	border-radius: 4px 4px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	border-bottom:1px solid rgba(81,81,81,1);
+}
+
+.wxBrowser_top_permanents {
+	height:19.5px;
+	margin:0;
+	padding:0;
+}
+
+.wxBrowser_title {
+	width:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	text-align:center;
+}
 .wxBrowser_nav {
 	position:relative;
-	border:1px solid red;
-	background:#ddd;
 	height:30.5px;
+	margin:0;
 	padding:8px 0 0 0;
 	width:500px;
 }
@@ -102,15 +140,16 @@
 
 .wxBrowser_iframe {
 	frameborder:0;
-	border:1px solid red;
+	border:none;
 	width:500px;
 	height:300px;
-	margin-top:8px;
+	margin:0px;
 	scrolling:auto;
 }
 </style>
 
 <script type="text/javascript" src="../../assets/js/jquery-1.4.3.js"></script>
+<script type="text/javascript" src="../../assets/js/jquery-ui-1.8.6.custom.min.js"></script>
 <script type="text/javascript">
 	function isUrl(s) {
 		var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
@@ -178,18 +217,48 @@
 					}
 				}
 			});
+		}).draggable({
+			containment: document.getElementsByTagName('body')[0],
+	    stack: ".wx_window",
+	    zIndex: 10
+		}).resizable({
+	    minHeight: 135,
+	    minWidth: 250,
+	    handles: "se"
+		});
+		$('.wxBrowser').each(function(){
+			$(this).find('.ui-icon-gripsmall-diagonal-se').css({
+		    "position": "absolute",
+		    "bottom": "0px",
+		    "right": "0px",
+		    "width": "10px",
+		    "height": "10px"
+		  });
 		});
 	});
 </script>
 
 <div class="wxBrowser" id="wxBrowser_test">
-<div class="wxBrowser_nav">
-	<div class="wxBrowser_button_back">&#60;</div>
-	<div class="wxBrowser_button_forward">&#62;</div>
-	<div class="wxBrowser_button_home">&#94;</div>
-	<form class="wxBrowser_url_field" id="wxBrowser_form_test"><div class="wxBrowser_loader"><img src="../../assets/imgs/loaders/browser_loader.gif" /></div><input type="text"/></form>
-	<div class="wxBrowser_button_refresh">R</div>
-	<div class="wxBrowser_button_stop">X</div>
+<div class="wxBrowser_top">
+	<div class="wxBrowser_top_permanents">
+		<div class="wxBrowser_buttons">
+			<div class="button close"></div>
+			<div class="button minimize"></div>
+			<div class="button maximize"></div>
+		</div>
+		<div class="wxBrowser_title">
+			Browser Title
+		</div>
+		<div class="button pill"></div>
+	</div>
+	<div class="wxBrowser_nav">
+		<div class="wxBrowser_button_back">&#60;</div>
+		<div class="wxBrowser_button_forward">&#62;</div>
+		<div class="wxBrowser_button_home">&#94;</div>
+		<form class="wxBrowser_url_field" id="wxBrowser_form_test"><div class="wxBrowser_loader"><img src="../../assets/imgs/loaders/browser_loader.gif" /></div><input type="text"/></form>
+		<div class="wxBrowser_button_refresh">R</div>
+		<div class="wxBrowser_button_stop">X</div>
+	</div>
 </div>
 <iframe class="wxBrowser_iframe" id="wxBrowser_iframe_test" src="http://google.com"></iframe>
 </div>
