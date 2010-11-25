@@ -116,6 +116,7 @@ WebX.init = function () {
   this.clock = new WebX.Clock();
   this.menubar = new WebX.Menubar();
   this.window = new WebX.Window();
+  this.dock = new WebX.Dock();
   //windowResize();
 };
 
@@ -384,77 +385,21 @@ WebX.Window.prototype.toggle = function (ele) {
   }
 };
 
-WebX.Create.prototype.dock = function () {
-
+WebX.Dock = function() {};
+WebX.Dock.prototype.create = function() {
   var theDock = $('<div/>', { id: "wxDock" }).appendTo('#webxWrapper');
   var theDock_wrapper = $('<div/>', { id: "wxDock_wrapper" }).appendTo(theDock);
   
   $('<div/>', { id: "wxDock_left" }).appendTo(theDock_wrapper);
   var dock_content = $('<ul/>', { id: "wxDock_ul" }).appendTo(theDock_wrapper);
   $('<div/>', { id: "wxDock_right" }).appendTo(theDock_wrapper);
-
-  webx_data.dock.items.forEach(function (obj) {
   
-    var dock_item = $('<li>', {
-      className: 'wxDock_item',
-      id: 'wxDock_item_' + webx_data.dock[obj].name,
-      data: {
-        "name": webx_data.dock[obj].name
-      }
-    }).appendTo(dock_content);
-    
-    var icon_div = $('<div/>', {
-      className: 'iIcon dockIcon',
-      id: 'dock_' + webx_data.dock[obj].name
-    }).appendTo(dock_item);
-
-    $('<div/>', {
-      className: "iGloss"
-    }).appendTo(icon_div);
-
-    if (webx_data.dock[obj].name === "Dashboard") {
-      WebX.create.dashboard();
-      $(icon_div).bind('click', function () {
-        wxDashInit();
-        return false;
-      });
-    } else if (webx_data.dock[obj].name === "Settings") {
-      $(icon_div).bind('click', function () {
-        WebX.window.toggle('#wxWindow_Settings');
-        return false;
-      });
-    }
-  });
-
-  // center the dock in the middle of the browser
-  var dockWidth = getDimensions($('#wxDock')).width;
-  $('#wxDock').css({
-    "marginLeft": -(dockWidth / 2) + "px"
-  });
-
-  // build a title tip for each link in dock
-  $(".wxDock_item").each(function () {
-    var icon_name = $(this).data('name');
-    var tip_id = 'wxDock_tip_' + icon_name;
-    var theTip = WebX.create.dockTip(tip_id, icon_name);
-    
-    $(this).append(theTip);
-
-    var tipWidth = $("div#" + tip_id).width();
-    var tipPos = (tipWidth / 2);
-    
-    $("div#" + tip_id).css({
-      "margin-left": '-' + tipPos + "px"
-    });
-    
-    // $(this).bind("mouseover", function () {
-    //   $('div#' + tip_id).show();
-    // }).bind("mouseout", function () {
-    //   $('div#' + tip_id).fadeOut('210');
-    // });
-    
-  }); // end a each function
-
+  for( var item in webx_data.dock.items ) {
+    WebX.dock.create_icon(webx_data.dock.items[item], dock_content);
+  }
+  
+  WebX.dock.center_dock();
+  
   // make sortable
   $(dock_content).sortable({
     opacity: 0.80,
@@ -462,26 +407,74 @@ WebX.Create.prototype.dock = function () {
     revert: true,
     tolerance: 'pointer',
     start: function(event, ui) {
-      $("#" + ui.item[0].id).find('.wxTip').addClass('moving');
+      $(ui.helper[0]).find('.wxTip').hide();
     },
     stop: function(event, ui) {
-      $("#" + ui.item[0].id).find('.wxTip').removeClass('moving');
+      // $("#" + ui.item[0].id).find('.wxTip').removeClass('moving');
     }
-  });
-  $(dock_content).disableSelection();
+  }).disableSelection();
 };
 
-WebX.Create.prototype.dockTip = function (tipID, tipText) {
-  var table = $('<div/>', {
+WebX.Dock.prototype.create_icon = function(item, target) {
+  var dock_item = $('<li>', {
+    className: 'wxDock_item',
+    id: 'wxDock_item_' + item,
+    data: {
+      "name": webx_data.dock[item].name
+    }
+  }).appendTo(target);
+  
+  var icon_div = $('<div/>', {
+    className: 'iIcon dockIcon',
+    id: 'dock_' + webx_data.dock[item].name
+  }).appendTo(dock_item);
+
+  $('<div/>', {
+    className: "iGloss"
+  }).appendTo(icon_div);
+  
+  WebX.dock.create_icon_tip(dock_item, webx_data.dock[item].name);
+  
+  if (item === "dashboard") {
+    WebX.create.dashboard();
+    $(icon_div).bind('click', function () {
+      wxDashInit();
+      return false;
+    });
+  } else if (item === "settings") {
+    $(icon_div).bind('click', function () {
+      WebX.window.toggle('#wxWindow_Settings');
+      return false;
+    });
+  }
+};
+
+WebX.Dock.prototype.create_icon_tip = function(icon, text) {
+  var tip_id = 'wxDock_tip_' + text;
+  var theTip = $('<div/>', {
     className: "wxTip",
-    id: tipID
+    id: tip_id
   });
   $('<div/>', {
     className: "wxTipText",
-    text: tipText
-  }).appendTo(table);
+    text: text
+  }).appendTo(theTip);
+  
+  $(icon).append(theTip);
 
-  return table;
+  var tipWidth = $("div#" + tip_id).width();
+  var tipPos = (tipWidth / 2);
+  
+  $("div#" + tip_id).css({
+    "margin-left": '-' + tipPos + "px"
+  });
+};
+
+WebX.Dock.prototype.center_dock = function() {
+  var dockWidth = getDimensions($('#wxDock')).width;
+  $('#wxDock').css({
+    "marginLeft": -(dockWidth / 2) + "px"
+  });
 };
 
 WebX.Create.prototype.dashboard = function () {
@@ -1233,7 +1226,7 @@ function doSomething() {
   // $('#contentbox').hover(function(){this.css('background','#ffffff');},function(){this.css('background','#666666');});
   $('#starter').hide();
   WebX.menubar.create();
-  WebX.create.dock();
+  WebX.dock.create();
   // console.log(webx_data.userInfo);
   // $('#contentbox').html("<a href='#' id='dynamic'>ooh dynamic!</a>");
   // $('#dynamic').click(function(){  });
