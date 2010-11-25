@@ -395,7 +395,7 @@ WebX.Dock.prototype.create = function() {
   $('<div/>', { id: "wxDock_right" }).appendTo(theDock_wrapper);
   
   for( var item in webx_data.dock.items ) {
-    WebX.dock.create_icon(webx_data.dock.items[item], dock_content);
+    WebX.dock.create_icon(webx_data.dock.items[item]);
   }
   
   // make sortable
@@ -413,11 +413,11 @@ WebX.Dock.prototype.create = function() {
   }).disableSelection();
 };
 
-WebX.Dock.prototype.create_icon = function(item, target) {
+WebX.Dock.prototype.create_icon = function(item) {
   var dock_item = $('<li>', {
     className: 'wxDock_item',
     id: 'wxDock_item_' + item
-  }).appendTo(target);
+  }).appendTo('#wxDock_ul');
   
   var icon_div = $('<div/>', {
     className: 'iIcon dockIcon',
