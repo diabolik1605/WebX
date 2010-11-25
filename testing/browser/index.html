@@ -18,17 +18,41 @@
 	height:60px;
 	position:relative;
 	background:#fcfcfc;
-	background: -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
-	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background: -moz-linear-gradient(top, #CBCBCB 0%, #A7A7A7 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#CBCBCB), color-stop(100%,#A7A7A7));
 	border-radius: 4px 4px 0px 0px;
 	-moz-border-radius: 4px 4px 0px 0px;
 	border-bottom:1px solid rgba(81,81,81,1);
+}
+
+.wxBrowser_buttons {
+	left: 7px;
+ 	position: absolute;
+ 	top: 4px;
+}
+.wxBrowser_buttons div {
+	width:10px;
+  height:10px;
+  -webkit-border-radius: 11px;
+  -moz-border-radius: 11px;
+  border-radius: 11px;
+  float:left;
+  padding: 0px;
+  margin: 0;
+  margin-right:7.35px;
+  border: 1px solid rgba(87, 94, 107, 0.85);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.1));
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0.1)));
+  font: small-caps bold 10px/10px Lucida;
+  text-align:center;
+  cursor:default;
 }
 
 .wxBrowser_top_permanents {
 	height:19.5px;
 	margin:0;
 	padding:0;
+	position:relative;
 }
 
 .wxBrowser_title {
@@ -249,7 +273,6 @@
 		<div class="wxBrowser_title">
 			Browser Title
 		</div>
-		<div class="button pill"></div>
 	</div>
 	<div class="wxBrowser_nav">
 		<div class="wxBrowser_button_back">&#60;</div>
