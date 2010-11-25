@@ -31,445 +31,81 @@
 })(jQuery);
 </script>
 <script type="text/javascript">
-  function getDimensions(ele) {
-      var display = $(ele).css('display');
-      
-      // All *Width and *Height properties give 0 on elements with display none,
-      // so enable the element temporarily
-      var originalVisibility = $(ele).css("visibility");
-      var originalDisplay = $(ele).css("display");
-      var originalPosition = $(ele).css("position");
-      
-      $(ele).css('visibility','hidden');
-      $(ele).css('display','block');
-      $(ele).css('position','absolute');
-      
-      var newWidth = $(ele).width();     
-      var newHeight = $(ele).height();
-      
-      $(ele).css('visibility',originalVisibility);
-      $(ele).css('display',originalDisplay);
-      $(ele).css('position',originalPosition);
+function getDimensions(ele) {
+  var display = $(ele).css('display');
 
-      return {
-          width: newWidth,
-          height: newHeight
-      };
+  // All *Width and *Height properties give 0 on elements with display none,
+  // so enable the element temporarily
+  var originalVisibility = $(ele).css("visibility");
+  var originalDisplay = $(ele).css("display");
+  var originalPosition = $(ele).css("position");
+
+  $(ele).css('visibility', 'hidden');
+  $(ele).css('display', 'block');
+  $(ele).css('position', 'absolute');
+
+  var newWidth = $(ele).width();
+  var newHeight = $(ele).height();
+
+  $(ele).css('visibility', originalVisibility);
+  $(ele).css('display', originalDisplay);
+  $(ele).css('position', originalPosition);
+
+  return {
+    width: newWidth,
+    height: newHeight
+  };
+}
+
+function getComputedStyleValue(element, style) {
+  return window.getComputedStyle(element, null).getPropertyValue(style);
+}
+
+function parentOffsets(obj) {
+  var curleft = 0;
+  var curtop = 0;
+  if (obj.offsetParent) {
+    do {
+      curleft += obj.offsetLeft;
+      curtop += obj.offsetTop;
+    } while (obj = obj.offsetParent);
   }
-  
-  function getComputedStyleValue(element, style) {
-      return window.getComputedStyle(element, null).getPropertyValue(style);
+  return {
+    left: curleft,
+    top: curtop
   }
-  
-  function parentOffsets(obj) {
-    var curleft = 0;
-      var curtop = 0;
-      if (obj.offsetParent) {
-        do {
-          curleft += obj.offsetLeft;
-          curtop += obj.offsetTop;
-        } while (obj = obj.offsetParent);
-      }
-    return {
-      left: curleft,
-      top: curtop
-    }
-  }
+}
 </script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Clock.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Dock.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Menubar.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Window.js"></script>
 <script type="text/javascript">
 var webx_data;
 var dashboardStatus = 0;
 var widgetDrawerStatus = 0;
 
-var dock_created = false;
-
 /*
-  * method $ce(element)
-  *	shortcut for document.createElement(element)
-  */
+* method $ce(element)
+*	shortcut for document.createElement(element)
+*/
 
 function $ce(ele) {
   return document.createElement(ele);
 }
-/*
-  * method stCap(string)
-  *	returns a string with first letter capitalized
-  *	and the rest of the string in lowercase
-  */
 
+/*
+* method stCap(string)
+*	returns a string with first letter capitalized
+*	and the rest of the string in lowercase
+*/
 function stCap(str) {
   return (str.charAt(0).toUpperCase() + str.substr(1).toLowerCase());
 }
-/*
-  * method canvasLeft(string)
-  *	returns absoluteLeft() of the canvas to the browser
-  */
 
-function canvasLeft() {
-  return document.getRootElement().getAbsoluteLeft();
-}
-
-/*--- WEBX OBJECT ---*/
-var WebX = {};
-WebX.init = function () {
-  this.create = new WebX.Create();
-  this.clock = new WebX.Clock();
-  this.menubar = new WebX.Menubar();
-  this.window = new WebX.Window();
-  this.dock = new WebX.Dock();
-  //windowResize();
-};
-
+/*--- WEBX OBJECTS ---*/
 WebX.Create = function () {};
-
-WebX.Clock = function () {};
-WebX.Clock.prototype.create = function(ele_id, target_id) {
-  $('<div>', {
-    id: ele_id
-  }).appendTo('#' + target_id);
-  WebX.clock.update('#' + ele_id);
-};
-
-WebX.Clock.prototype.update = function(ele_id) {
-  var now = new Date();
-  var hours = now.getHours();
-  var mins = now.getMinutes();
-  var secn = now.getSeconds();
-  var day = now.getDay();
-  var theDay = now.getDate();
-  var month = now.getMonth();
-  var year = now.getFullYear();
-  var dayList = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  if (hours >= 12) { AorP = "PM"; } else { AorP = "AM"; }
-  if (hours >= 13) { hours -= 12; }
-  if (hours === 0) { hours = 12; }
-  if (secn < 10) { secn = "0" + secn; }
-  if (mins < 10) { mins = "0" + mins; }
-  $(ele_id).html(dayList[day] + ",&nbsp;" + monthList[month] + "&nbsp;" + theDay + ",&nbsp;" + year + "&nbsp;&nbsp;|&nbsp;&nbsp;" + hours + ":" + mins + "&nbsp;" + AorP);
-  setTimeout(function () {
-    WebX.clock.update(ele_id);
-  }, 1000);
-};
-
-WebX.Menubar = function() {};
-WebX.Menubar.prototype.create = function() {
-  var menubar = $('<div>', {
-    id: "menubar"
-  }).appendTo('#webxWrapper');
-
-  var menubar_ul = $('<ul>', {id: "menubar_ul"}).appendTo(menubar);
-
-  var user_area = $('<li>', {
-    id: 'mb_user_area',
-    css: {
-      'float': 'right',
-      'margin': '2px 16px 0px 8px'
-    }
-  }).appendTo(menubar_ul);
-  
-  WebX.clock.create('wx_mb_clock','mb_user_area');
-  
-  $('<div>', {
-    id: 'wx_mb_user_name',
-    text: 'Default User'
-  }).prependTo(user_area);
-  
-  $('<div>', {
-    id: 'wx_mb_user_pic'
-  }).prependTo(user_area);
-
-  for (var this_item in webx_data.menubar.items ) {
-    WebX.menubar.create_link(webx_data.menubar.items[this_item],menubar_ul);
-  }
-  
-  for (var panel in webx_data.menubar.panels) {
-    if(panel !== 'login') {
-      var thisLeft = parentOffsets($('#mb_'+ panel)[0]).left;
-      webx_data.menubar.panels[panel].offsetLeft = (thisLeft) + "px";
-      WebX.menubar.create_panel(panel, '#webx_wrapper'); 
-    }
-  }
-};
-
-WebX.Menubar.prototype.create_link = function(obj,target) {
-  $('<li>', {
-    className: "mb_item",
-    id: 'mb_' + obj,
-    text: stCap(obj),
-    click: function (e) {
-      e.preventDefault();
-      var panel_name = "#" + obj + "_panel";
-      $('div.mbWindow').not(panel_name).slideUp(210);
-      $(panel_name).slideToggle();
-      return false;
-    },
-    mouseover: function (e) {
-      var panel_name = "#" + obj + "_panel";
-      if ($('div.mbWindow').not(panel_name).is(':visible')) {
-        $('div.mbWindow').not(panel_name).slideUp(210);
-        $(panel_name).slideToggle();
-      } else {
-        e.preventDefault();
-        return false;
-      }
-    }
-  }).appendTo(target);
-};
-
-WebX.Menubar.prototype.create_panel = function(panel, target) {
-  // console.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
-  var panel_name = panel + '_panel';
-  var mb_panel = $('<div>', {
-    id: panel_name,
-    className: "mbWindow",
-    css: {
-      'position': 'absolute',
-      'top': getDimensions('#menubar').height + 'px',
-      'left': webx_data.menubar.panels[panel].offsetLeft
-    }
-  }).appendTo('#webxWrapper');
-  
-  var mb_link_ul = $('<ul>').appendTo(mb_panel);
-
-  for (var o = 0; o < webx_data.menubar.panels[panel].length; o++) {
-    WebX.menubar.create_panel_link(panel, webx_data.menubar.panels[panel][o], mb_link_ul);
-  }
-  
-  mb_panel.slideUp();
-};
-
-WebX.Menubar.prototype.create_panel_link = function(panel, link_name, target) {
-  var mb_link_li = $('<li>', {
-    text: stCap(link_name),
-    click: function (e) {
-      e.preventDefault();
-      return false;
-    }
-  }).appendTo(target);
-  
-  switch (panel) {
-  case "dock":
-    if(link_name === "toggle") {
-      $(mb_link_li).bind('click', function () {
-        wxDockToggle();
-        return false;
-      });
-    }
-    break;
-  case "login":
-    switch (link_name) {
-    case "register":
-      $(mb_link_li).bind('click', function () {
-        WebX.create.login();
-        return false;
-      });
-      break;
-    case "login":
-      $(mb_link_li).bind('click', function () {
-        login();
-        return false;
-      });
-      break;
-    }
-    break;
-  }
-};
-
-WebX.Window = function () {};
-WebX.Window.prototype.maximize = function (ele) {
-  var width_modifier;
-  var height_modifier;
-  if($(ele).data('windowType') === 'finder'){
-    width_modifier =136;
-    height_modifier = 27;
-  } else {
-    width_modifier = 0;
-    height_modifier = 0;
-  }
-  var browser_size = getDimensions(document.getElementsByTagName('body')[0]);
-  if (!$(ele).data('sizeState') || $(ele).data('sizeState') !== "max") {
-    var eleSize = getDimensions($(ele));
-    $(ele).data({
-      "originalLeft": $(ele).css("left"),
-      "originalTop": $(ele).css("top"),
-      "originalHeight": eleSize.height,
-      "originalWidth": eleSize.width,
-      "sizeState": "min"
-    });
-  }
-  if ($(ele).data('sizeState') === "min") {
-    $(ele).css({
-      "width": browser_size.width + "px",
-      "height": browser_size.height - $('#menubar').outerHeight(true) + "px",
-      "top": $('#menubar').outerHeight(true) + "px",
-      "left": width_modifier + "px"
-    });
-    $(ele).find('.wxWindow_body').css({
-      "width": "100%",
-      "height": ($(ele).outerHeight(false) - 60 - height_modifier) + "px"
-    });
-    $(ele).find('.wxWindow_body_content').css({
-      "width": ($(ele).find('.wxWindow_body_wrapper').outerWidth(false) - width_modifier) + "px",
-      "height": "100%",
-      "left": width_modifier + "px"
-    });
-    $(ele).data('sizeState', "max");
-  } else {
-    $(ele).css({
-      "width": $(ele).data('originalWidth') + "px",
-      "height": $(ele).data('originalHeight') + "px",
-      "top": $(ele).data('originalTop'),
-      "left": $(ele).data('originalLeft')
-    });
-    $(ele).find('.wxWindow_body').css({
-      "width": "100%",
-      "height": ($(ele).data('originalHeight') - 60 - (($(ele).data('windowType') === 'finder') ? height_modifier - 2 : height_modifier)) + "px"
-    });
-    $(ele).find('.wxWindow_body_content').css({
-      "width": ($(ele).find('.wxWindow_body_wrapper').outerWidth(false) - width_modifier) + "px",
-      "height": "100%",
-      "left": width_modifier + "px"
-    });
-    $(ele).data('sizeState', "min");
-  }
-};
-
-WebX.Window.prototype.close = function (ele) {
-  if (!$(ele).data('viewState')) {
-    $(ele).data({
-      "viewState": ""
-    });
-  }
-  if ($(ele).data('viewState') !== "closed") {
-    $(ele).fadeOut(420);
-    $(ele).data('viewState', "closed");
-  }
-};
-
-WebX.Window.prototype.open = function (ele, opt) {
-  if (!$(ele).data('viewState')) {
-    $(ele).data({
-      "viewState": ""
-    });
-  }
-  if ($(ele).data('viewState') !== "open") {
-    $(ele).fadeIn(420);
-    $(ele).data('viewState', "open");
-  }
-};
-
-WebX.Window.prototype.toggle = function (ele) {
-  if ($(ele).length === 0) {
-    var window_title;
-    var window_content;
-    var window_type;
-    switch (ele.replace('#wxWindow_', '')) {
-    case 'Settings':
-      window_title = 'Settings';
-      window_content = 'Settings will go here.';
-      window_type = 'finder';
-      break;
-    default:
-      window_title = 'Title';
-      window_content = '';
-      window_type = 'finder';
-      break;
-    }
-    WebX.create.window(window_type, 357, 287, ele.replace('#', ''), window_title, window_content);
-    $(ele).fadeIn(420);
-  } else if ($(ele).is(':visible')) {
-    WebX.window.close(ele);
-  } else if (!$(ele).is(':visible')) {
-    WebX.window.open(ele);
-  }
-};
-
-WebX.Dock = function() {};
-WebX.Dock.prototype.create = function() {
-  var theDock = $('<div/>', { id: "wxDock" }).appendTo('#webxWrapper');
-  var theDock_wrapper = $('<div/>', { id: "wxDock_wrapper" }).appendTo(theDock);
-  
-  $('<div/>', { id: "wxDock_left" }).appendTo(theDock_wrapper);
-  var dock_content = $('<ul/>', { id: "wxDock_ul" }).appendTo(theDock_wrapper);
-  $('<div/>', { id: "wxDock_right" }).appendTo(theDock_wrapper);
-  
-  for( var item in webx_data.dock.items ) {
-    WebX.dock.create_icon(webx_data.dock.items[item]);
-  }
-  
-  // make sortable
-  $(dock_content).sortable({
-    opacity: 0.80,
-    helper: 'clone',
-    revert: true,
-    tolerance: 'pointer',
-    start: function(event, ui) {
-      $(ui.helper[0]).find('.wxTip').hide();
-    },
-    stop: function(event, ui) {
-      // $("#" + ui.item[0].id).find('.wxTip').removeClass('moving');
-    }
-  }).disableSelection();
-};
-
-WebX.Dock.prototype.create_icon = function(item) {
-  var dock_item = $('<li>', {
-    className: 'wxDock_item',
-    id: 'wxDock_item_' + item
-  }).appendTo('#wxDock_ul');
-  
-  var icon_div = $('<div/>', {
-    className: 'iIcon dockIcon',
-    id: 'dock_' + stCap(item)
-  }).appendTo(dock_item);
-
-  $('<div/>', { className: "iGloss" }).appendTo(icon_div);
-  
-  WebX.dock.create_icon_tip(dock_item, stCap(item));
-  
-  if (item === "dashboard") {
-    WebX.create.dashboard();
-    $(icon_div).bind('click', function () {
-      wxDashInit();
-      return false;
-    });
-  } else if (item === "settings") {
-    $(icon_div).bind('click', function () {
-      WebX.window.toggle('#wxWindow_Settings');
-      return false;
-    });
-  }
-  WebX.dock.center_dock();
-};
-
-WebX.Dock.prototype.create_icon_tip = function(icon, text) {
-  var tip_id = 'wxDock_tip_' + text;
-  var theTip = $('<div/>', {
-    className: "wxTip",
-    id: tip_id
-  });
-  $('<div/>', {
-    className: "wxTipText",
-    text: text
-  }).appendTo(theTip);
-  
-  $(icon).append(theTip);
-
-  var tipPos = $("div#" + tip_id).width() / 2;
-  
-  $("div#" + tip_id).css({
-    "margin-left": '-' + tipPos + "px"
-  });
-};
-
-WebX.Dock.prototype.center_dock = function() {
-  var dockWidth = getDimensions($('#wxDock')).width;
-  $('#wxDock').css({
-    "marginLeft": -(dockWidth / 2) + "px"
-  });
-};
-
 WebX.Create.prototype.dashboard = function () {
   $('<div>', {
     id: "dashboardPanel"
@@ -493,6 +129,84 @@ WebX.Create.prototype.dashboard = function () {
     id: "dbManageButton"
   }).appendTo(dbOverlay);
 };
+
+function wxDashInit() {
+  //loads popup only if it is disabled
+  if (dashboardStatus === 0) {
+    $("div#dbManageButton").hide();
+    $('div#dbOverlay').animate({
+      opacity: "toggle"
+    }, 420);
+    dashboardStatus = 1;
+  } else if (dashboardStatus === 1 && widgetDrawerStatus === 1) {
+    $('div#webxWrapper, div#dbOverlay').animate({
+      marginTop: "0px"
+    }, {
+      queue: false,
+      duration: 420
+    });
+    $("div#dbDrawerButton").animate({
+      rotate: '+=135deg'
+    }, {
+      queue: false,
+      duration: 420
+    });
+    $("div#dbManageButton").animate({
+      opacity: 'toggle'
+    }, {
+      queue: false,
+      duration: 420
+    });
+    $("div#dbOverlay").fadeOut(420);
+    widgetDrawerStatus = 0;
+    dashboardStatus = 0;
+  } else if (dashboardStatus === 1) {
+    $("div#dbOverlay").fadeOut(420);
+    dashboardStatus = 0;
+  }
+}
+
+function wxDashDrawer() {
+  if (widgetDrawerStatus === 0) {
+    $('div#webxWrapper, div#dbOverlay').animate({
+      marginTop: "-118px"
+    }, {
+      duration: 420
+    }, "linear");
+    $("div#dbDrawerButton").animate({
+      rotate: '-=135deg'
+    }, {
+      queue: false,
+      duration: 420
+    });
+    $("div#dbManageButton").animate({
+      opacity: 'toggle'
+    }, {
+      queue: false,
+      duration: 420
+    });
+    widgetDrawerStatus = 1;
+  } else if (widgetDrawerStatus === 1) {
+    $('div#webxWrapper, div#dbOverlay').animate({
+      marginTop: "0px"
+    }, {
+      duration: 420
+    }, "linear");
+    $("div#dbDrawerButton").animate({
+      rotate: '+=135deg'
+    }, {
+      queue: false,
+      duration: 420
+    });
+    $("div#dbManageButton").animate({
+      opacity: 'toggle'
+    }, {
+      queue: false,
+      duration: 420
+    });
+    widgetDrawerStatus = 0;
+  }
+}
 
 WebX.Create.prototype.window = function (type, width, height, id, title, content) {
   var wx_window = $('<div/>', {
@@ -714,30 +428,6 @@ WebX.Create.prototype.login = function () {
   });
 };
 
-function wxDockClose() {
-  $('#wxDock').animate({
-    'margin-bottom': '-58px'
-  }, 420, 'easeOutExpo', function () {
-    $('#wxDock').data('state', 'closed');
-  });
-}
-
-function wxDockOpen() {
-  $('#wxDock').animate({
-    'margin-bottom': '0px'
-  }, 420, 'easeOutExpo', function () {
-    $('#wxDock').data('state', 'open');
-  });
-}
-
-function wxDockToggle() {
-  if ($('#wxDock').css('margin-bottom') === '0px') {
-    wxDockClose();
-  } else {
-    wxDockOpen();
-  }
-}
-
 function wxWindowPillExpand(ele) {
 var elements;
 switch($(ele).data('windowType')) {
@@ -903,84 +593,6 @@ function wxWindowPillToggle(ele) {
     wxWindowPillContract(ele);
   } else {
     wxWindowPillExpand(ele);
-  }
-}
-
-function wxDashInit() {
-  //loads popup only if it is disabled
-  if (dashboardStatus === 0) {
-    $("div#dbManageButton").hide();
-    $('div#dbOverlay').animate({
-      opacity: "toggle"
-    }, 420);
-    dashboardStatus = 1;
-  } else if (dashboardStatus === 1 && widgetDrawerStatus === 1) {
-    $('div#webxWrapper, div#dbOverlay').animate({
-      marginTop: "0px"
-    }, {
-      queue: false,
-      duration: 420
-    });
-    $("div#dbDrawerButton").animate({
-      rotate: '+=135deg'
-    }, {
-      queue: false,
-      duration: 420
-    });
-    $("div#dbManageButton").animate({
-      opacity: 'toggle'
-    }, {
-      queue: false,
-      duration: 420
-    });
-    $("div#dbOverlay").fadeOut(420);
-    widgetDrawerStatus = 0;
-    dashboardStatus = 0;
-  } else if (dashboardStatus === 1) {
-    $("div#dbOverlay").fadeOut(420);
-    dashboardStatus = 0;
-  }
-}
-
-function wxDashDrawer() {
-  if (widgetDrawerStatus === 0) {
-    $('div#webxWrapper, div#dbOverlay').animate({
-      marginTop: "-118px"
-    }, {
-      duration: 420
-    }, "linear");
-    $("div#dbDrawerButton").animate({
-      rotate: '-=135deg'
-    }, {
-      queue: false,
-      duration: 420
-    });
-    $("div#dbManageButton").animate({
-      opacity: 'toggle'
-    }, {
-      queue: false,
-      duration: 420
-    });
-    widgetDrawerStatus = 1;
-  } else if (widgetDrawerStatus === 1) {
-    $('div#webxWrapper, div#dbOverlay').animate({
-      marginTop: "0px"
-    }, {
-      duration: 420
-    }, "linear");
-    $("div#dbDrawerButton").animate({
-      rotate: '+=135deg'
-    }, {
-      queue: false,
-      duration: 420
-    });
-    $("div#dbManageButton").animate({
-      opacity: 'toggle'
-    }, {
-      queue: false,
-      duration: 420
-    });
-    widgetDrawerStatus = 0;
   }
 }
 
