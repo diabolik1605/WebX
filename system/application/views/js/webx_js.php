@@ -398,8 +398,6 @@ WebX.Dock.prototype.create = function() {
     WebX.dock.create_icon(webx_data.dock.items[item], dock_content);
   }
   
-  WebX.dock.center_dock();
-  
   // make sortable
   $(dock_content).sortable({
     opacity: 0.80,
@@ -418,22 +416,17 @@ WebX.Dock.prototype.create = function() {
 WebX.Dock.prototype.create_icon = function(item, target) {
   var dock_item = $('<li>', {
     className: 'wxDock_item',
-    id: 'wxDock_item_' + item,
-    data: {
-      "name": webx_data.dock[item].name
-    }
+    id: 'wxDock_item_' + item
   }).appendTo(target);
   
   var icon_div = $('<div/>', {
     className: 'iIcon dockIcon',
-    id: 'dock_' + webx_data.dock[item].name
+    id: 'dock_' + stCap(item)
   }).appendTo(dock_item);
 
-  $('<div/>', {
-    className: "iGloss"
-  }).appendTo(icon_div);
+  $('<div/>', { className: "iGloss" }).appendTo(icon_div);
   
-  WebX.dock.create_icon_tip(dock_item, webx_data.dock[item].name);
+  WebX.dock.create_icon_tip(dock_item, stCap(item));
   
   if (item === "dashboard") {
     WebX.create.dashboard();
@@ -447,6 +440,7 @@ WebX.Dock.prototype.create_icon = function(item, target) {
       return false;
     });
   }
+  WebX.dock.center_dock();
 };
 
 WebX.Dock.prototype.create_icon_tip = function(icon, text) {
@@ -462,8 +456,7 @@ WebX.Dock.prototype.create_icon_tip = function(icon, text) {
   
   $(icon).append(theTip);
 
-  var tipWidth = $("div#" + tip_id).width();
-  var tipPos = (tipWidth / 2);
+  var tipPos = $("div#" + tip_id).width() / 2;
   
   $("div#" + tip_id).css({
     "margin-left": '-' + tipPos + "px"
