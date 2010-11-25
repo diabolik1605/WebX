@@ -32,15 +32,13 @@ html,body {
 .iIcon {
   width: 42px;
   height: 42px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
   border-radius: 8px;
+  -moz-border-radius: 8px;;
   background: #fff;
   float: left;
   margin: 0px auto;
-  -webkit-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.6);
   position:relative;
   -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.7, transparent), to(rgba(255,255,255,0.5)));
 }
@@ -63,22 +61,17 @@ html,body {
   height: 23px;
   width: 42px;
   position: relative;
-  -webkit-border-top-left-radius: 8px;
-  -webkit-border-top-right-radius: 8px;
-  -webkit-border-bottom-right-radius: 30px 4px;
-  -webkit-border-bottom-left-radius: 30px 4px;
-  -moz-border-radius-topleft: 8px;
-  -moz-border-radius-topright: 8px;
-  -moz-border-radius-bottomright: 30px 4px;
-  -moz-border-radius-bottomleft: 30px 4px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 30px 4px;
   border-bottom-left-radius: 30px 4px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 30px 4px;
+  -moz-border-radius-bottomleft: 30px 4px;
   z-index: 5;
-  -webkit-box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.4);
-  -moz-box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.4);
   box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.4);
 }
 
 /*--- MENUBAR ---*/
@@ -92,9 +85,8 @@ html,body {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.6)), color-stop(100%,rgba(0, 0, 0, 0.6)));
   background: rgba(0, 0, 0, 0.6);
   border-bottom: 1px solid rgba(0,0,0,0.7);
-  -webkit-box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
-  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
   box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
 }
 
 #menubar ul {
@@ -161,15 +153,10 @@ html,body {
   border-right: 1px solid rgba(0,0,0,0.6);
   border-bottom: 1px solid rgba(0,0,0,0.6);
   border-left: 1px solid rgba(0,0,0,0.6);
-  -webkit-border-bottom-right-radius:8px;
-  -webkit-border-bottom-left-radius:8px;
-  -moz-border-radius-bottomright:8px;
-  -moz-border-radius-bottomleft:8px;
-  border-bottom-right-radius:8px;
-  border-bottom-left-radius:8px;
-  -webkit-box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
+  border-radius:0px 0px 8px 8px;
+  -moz-border-radius:0px 0px 8px 8px;
   box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
   display: none;
   width: 140px;
   position: absolute;
@@ -205,20 +192,17 @@ html,body {
 	padding:0;
 	margin:0;
 	border:1px solid rgba(155,155,155,1);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
 	border-radius: 4px;
-	-webkit-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+	-moz-border-radius: 4px;
+	box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
 	z-index:10;
 }
 
 /*--- WINDOW TYPE APP ---*/
 .wxWindow_app {
-  -webkit-border-radius: 4px 4px 0px 0px;
-  -moz-border-radius: 4px 4px 0px 0px;
   border-radius: 4px 4px 0px 0px;
+  -moz-border-radius: 4px 4px 0px 0px;
 }
 
 .wxWindow_top {
@@ -234,13 +218,11 @@ html,body {
 .wxWindow_top_wrapper {
 	width:100%;
 	height:100px;
-	-webkit-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
-	-moz-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
 	box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
+	-moz-box-shadow: inset 0px 5px 30px rgba(255,255,255,0.3);
 	margin:0 auto 0px;
-	-webkit-border-radius: 4px 4px 0px 0px;
-	-moz-border-radius: 4px 4px 0px 0px;
 	border-radius: 4px 4px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
 	position:relative;
 }
 
@@ -253,9 +235,8 @@ html,body {
 .wxWindow_top_buttons .button {
   width:10px;
   height:10px;
-  -webkit-border-radius: 11px;
-  -moz-border-radius: 11px;
   border-radius: 11px;
+  -moz-border-radius: 11px;
   float:left;
   padding: 0px;
   margin: 0;
@@ -271,9 +252,8 @@ html,body {
 .wxWindow_top_pill {
   width:16.35px;
   height:6.35px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
   border-radius: 10px;
+  -moz-border-radius: 10px;
   float:left;
   border: 1px solid rgba(81, 81, 81, 0.85);
   background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.1));
@@ -349,13 +329,11 @@ html,body {
 .wxWindow_footer_wrapper {
 	width:100%;
 	height:46px;
-	-webkit-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
-	-moz-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
 	box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
+	-moz-box-shadow: inset 0px 1px 30px rgba(255,255,255,0.3);
 	margin:-23px auto 0px;
-	-webkit-border-radius: 0px 0px 4px 4px;
-	-moz-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
+	-moz-border-radius: 0px 0px 4px 4px;
 }
 
 /*--- WINDOW TYPE APP FOOTER ---*/
@@ -457,13 +435,11 @@ html,body {
   padding: 0;
   top: -32px;
   left: 50%;
-  
 }
 
 .wxTipText {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
   border-radius: 20px;
+  -moz-border-radius: 20px;
   background: rgba(30, 30, 30, 0.68);
   height: 20px;
   color: #fff;
@@ -534,11 +510,13 @@ html,body {
 	height:16px;
 	margin:0;
 	padding:0;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
+	
 	border-radius: 4px;
+	-moz-border-radius: 4px;
+	
 	overflow:none;
 	border:1px solid #828282;
+	behavior: url(../PIE.php);
 }
 .wxButton_toggle_square {
 	width:50;
