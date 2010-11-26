@@ -5,5 +5,6 @@ WebX.init = function () {
   this.menubar = new WebX.Menubar();
   this.window = new WebX.Window();
   this.dock = new WebX.Dock();
+  this.browser = new WebX.Browser();
   //windowResize();
 };

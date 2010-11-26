@@ -75,12 +75,17 @@ function parentOffsets(obj) {
     top: curtop
   }
 }
+function isUrl(s) {
+	var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+	return regexp.test(s);
+}
 </script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Clock.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Dock.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Menubar.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Window.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Browser.js"></script>
 <script type="text/javascript">
 var webx_data;
 var dashboardStatus = 0;
