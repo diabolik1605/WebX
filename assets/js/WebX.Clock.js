@@ -1,8 +1,8 @@
 WebX.Clock = function () {};
-WebX.Clock.prototype.create = function (ele_id, target_id) {
+WebX.Clock.prototype.create = function (ele_id, target) {
   $('<div>', {
     id: ele_id
-  }).appendTo('#' + target_id);
+  }).appendTo(target);
   WebX.clock.update('#' + ele_id);
 };
 

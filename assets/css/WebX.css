@@ -74,114 +74,6 @@ html,body {
   -moz-box-shadow: inset 0px 2px 1px rgba(255, 255, 255, 0.4);
 }
 
-/*--- MENUBAR ---*/
-#menubar {
-  top: 0;
-  width: 100%;
-  height: 30px;
-  position: relative;
-  z-index: 999;
-  background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.6)), color-stop(100%,rgba(0, 0, 0, 0.6)));
-  background: rgba(0, 0, 0, 0.6);
-  border-bottom: 1px solid rgba(0,0,0,0.7);
-  box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
-  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.5);
-}
-
-#menubar ul {
-  height: 30px;
-  margin: 0 0 0 13px;
-  padding: 0;
-}
-
-#menubar ul li {
-  float: left;
-  list-style-type: none;
-  padding: 6px 8px;
-  margin: 0;
-  cursor: default;
-}
-
-#menubar ul li:hover {
-  background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.4)), color-stop(100%,rgba(0, 0, 0, 0.4)));
-}
-
-#mb_user_area {
-  float: right;
-  list-style-type: none;
-  margin: 2px 16px 0px 8px;
-  padding: 0;
-  font: 9px/9px Geneva, "Myriad Pro", helvetica;
-  position: relative;
-}
-
-#wx_mb_clock {
-  position: absolute;
-  top: 14px;
-  right: 30px;
-  text-align: right;
-  min-width: 220px;
-  max-width: 250px;
-}
-
-#wx_mb_user_name {
-  position: absolute;
-  top: 2px;
-  right: 30px;
-  text-align: right;
-  min-width: 180px;
-  max-width: 220px;
-}
-
-#wx_mb_user_pic {
-  width: 22px;
-  height: 22px;
-  float: right;
-  border: 1px solid rgba(0,0,0,0.7);
-  display: block;
-  position: absolute;
-  top: 2px;
-  right: 0;
-  background: url(../imgs/menubar/default_user.png) no-repeat;
-}
-
-/*--- MENUBAR PANELS ---*/
-.mbWindow {
-  background: rgba(0,0,0,0.4);
-  border-right: 1px solid rgba(0,0,0,0.6);
-  border-bottom: 1px solid rgba(0,0,0,0.6);
-  border-left: 1px solid rgba(0,0,0,0.6);
-  border-radius:0px 0px 8px 8px;
-  -moz-border-radius:0px 0px 8px 8px;
-  box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0px 6px 10px rgba(0,0,0,0.4);
-  display: none;
-  width: 140px;
-  position: absolute;
-  z-index: 998;
-}
-
-.mbWindow ul {
-  list-style-type: none;
-  padding: 6px 0px 4px;
-  margin: 0;
-}
-
-.mbWindow ul li {
-  color: #ffffff;
-  cursor: default;
-  padding: 0px 16px;
-  margin-bottom: 2px;
-}
-
-.mbWindow ul li:hover {
-  color: #ffffff;
-  background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.4)), color-stop(100%,rgba(0, 0, 0, 0.4)));
-}
-
 /*--- WINDOWS ---*/
 .wxWindow {
 	width:350px;
@@ -424,6 +316,10 @@ html,body {
 
 #dock_Paste {
   background: url("../imgs/dock/dock_sprite.png") 0 -42px no-repeat;
+}
+
+#dock_Browser {
+  background: url("../imgs/dock/dock_sprite.png") 0 -126px no-repeat;
 }
 
 /*--- DOCK TIPS---*/

@@ -62,32 +62,52 @@ class User extends Controller {
 	
 	function getDefaultSettings() {
 		$settings = '{
-        "menubar": {
-    		"items": [
-    				"start",
-    				"dock"
-    		],
-    		"panels": {
-    			"start": [
-    				"about",
-    				"update"
-    			],
-    			"dock": [
-    				"toggle"
-    			],
-    			"login": [
-    				"register",
-    				"login"
-    			]
-    		}
-    	},
+      "menubar": {
+        "finder": {
+          "Start": {
+            "About": {
+              "click": "return false"
+            },
+            "Prefrences": {
+              "click": "return false"
+            }
+          },
+          "Dock": {
+            "Toggle": {
+              "click": "WebX.dock.toggle"
+            }
+          }
+        },
+        "browser": {
+          "Start": {
+            "About": {
+              "click": "return false"
+            },
+            "Prefrences": {
+              "click": "return false"
+            }
+          },
+          "File": {
+            "New Window": {
+              "click": "return false"
+            },
+            "New Tab": {
+              "click": "return false"
+            }
+          }
+        }
+      },
     	"dock":{
     		"items": [
     		  "dashboard",
     			"files",
     			"paste",
+    			"browser",
     			"settings"
     		],
+    		"browser": {
+    		  "name": "Browser"
+    		},
     		"settings":{
     		    "name": "Settings"
     		},

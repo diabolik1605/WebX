@@ -55,13 +55,19 @@ WebX.Dock.prototype.create_icon = function (item) {
 
   if (item === "dashboard") {
     WebX.create.dashboard();
-    $(icon_div).bind('click', function () {
+    icon_div.bind('click', function () {
       wxDashInit();
       return false;
     });
   } else if (item === "settings") {
-    $(icon_div).bind('click', function () {
+    icon_div.bind('click', function () {
       WebX.window.toggle('#wxWindow_Settings');
+      return false;
+    });
+  } else if (item === "browser") {
+    icon_div.bind('click', function () {
+      WebX.browser.create();
+      WebX.menubar.switch_to('browser');
       return false;
     });
   }
