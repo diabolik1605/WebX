@@ -37,18 +37,18 @@ WebX.Browser.prototype.create = function (site_url) {
   var browser_nav = $('<div/>', {
     className: "wxBrowser_nav"
   }).appendTo(browser_top);
-  // Back Button
-  $('<div/>',{
-    className: "wxBrowser_button_back"
-  }).appendTo(browser_nav).bind('click', function(){
-    console.log('back button clicked');
-		return false;
-  });
   // Forward Button
   $('<div/>',{
     className: "wxBrowser_button_forward"
   }).appendTo(browser_nav).bind('click', function(){
     console.log('forward button clicked');
+		return false;
+  });
+  // Back Button
+  $('<div/>',{
+    className: "wxBrowser_button_back"
+  }).appendTo(browser_nav).bind('click', function(){
+    console.log('back button clicked');
 		return false;
   });
   // Home Button
@@ -60,7 +60,7 @@ WebX.Browser.prototype.create = function (site_url) {
   });
   // Url Form
   var browser_form = $('<form/>',{
-    className: "wxBrowser_url_field",
+    className: "wxBrowser_url_field browser_resize",
     id: "wxBrowser_form_" + this_id
   }).appendTo(browser_nav);
   // Loader Div
@@ -71,7 +71,8 @@ WebX.Browser.prototype.create = function (site_url) {
   $('<img src="assets/imgs/loaders/browser_loader.gif" />').appendTo(loader_div);
   // Url Form input
   var browser_input = $('<input type="text">').attr({
-    "value" : (!site_url) ? "http://google.com" : site_url
+    "value" : (!site_url) ? "http://google.com" : site_url,
+    "class" : "browser_resize"
   }).appendTo(browser_form);
   // Refresh Button
   $('<div/>',{
@@ -89,7 +90,7 @@ WebX.Browser.prototype.create = function (site_url) {
   });
   // Iframe
   var browser_iframe = $('<iframe/>', {
-    className: "wxBrowser_iframe",
+    className: "wxBrowser_iframe browser_resize",
     id: "wxBrowser_iframe_" + this_id
   }).attr({
     "src" : (!site_url) ? "http://google.com" : site_url
@@ -113,7 +114,7 @@ WebX.Browser.prototype.create = function (site_url) {
 				browser_iframe.attr({'src': 'http://www.google.com/search?hl=en&q='+ wxIframe_source.replace(' ','+') +'&btnI=I%27m+Feeling+Lucky'}).bind('load', function(){ loader_div.hide(); });
 				browser_input.attr({'value': browser_iframe.attr('src')});
 			} else {
-				var history = $(wxIframe).data('history');
+				var history = browser_iframe.data('history');
 				history[history.length] = browser_iframe.data('home');
 				loader_div.show();
 				browser_iframe.attr({'src': browser_iframe.data('home') }).data({ "history": history }).bind('load', function(){ loader_div.hide(); });
@@ -128,9 +129,9 @@ WebX.Browser.prototype.create = function (site_url) {
     handle: browser_top,
     zIndex: 10
 	}).resizable({
-	  alsoResize: browser_iframe,
+	  alsoResize: ".browser_resize",
     minHeight: 135,
-    minWidth: 250,
+    minWidth: 518,
     handles: "se"
 	});
 	browser.find('.ui-icon-gripsmall-diagonal-se').css({

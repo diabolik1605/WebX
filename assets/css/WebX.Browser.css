@@ -53,6 +53,7 @@
 
 .wxBrowser_top_permanents {
 	height:19.5px;
+	width:100%;
 	margin:0;
 	padding:0;
 	position:relative;
@@ -71,7 +72,7 @@
 	height:30.5px;
 	margin:0;
 	padding:8px 0 0 0;
-	width:500px;
+	width:100%;
 }
 
 .wxBrowser_nav div,
@@ -80,7 +81,7 @@
 	background: -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
 	border:1px solid #545454;
-	position:absolute;
+	float:left;
 }
 
 .wxBrowser_nav div {
@@ -93,6 +94,7 @@
 	border-radius: 30px;
 	-moz-border-radius: 30px;
 	behavior: url(../ie-css3.php);
+	position:absolute;
 	top:3px;
 	left:7px;
 	z-index:11;
@@ -105,7 +107,7 @@
 	-moz-border-radius: 0px 20px 20px 0px;
 	behavior: url(../ie-css3.php);
 	position:absolute;
-	left:35px;
+	left:34px;
 	z-index:10;
 }
 .wxBrowser_button_home {
@@ -115,7 +117,7 @@
 	border-radius: 20px;
 	-moz-border-radius: 20px;
 	behavior: url(../ie-css3.php);
-	left:71px;
+	margin:0px 12px 0px 76px;
 	z-index:10;
 }
 .wxBrowser_button_refresh {
@@ -125,7 +127,7 @@
 	border-radius: 20px;
 	-moz-border-radius: 20px;
 	behavior: url(../ie-css3.php);
-	left:404px;
+	margin:0px 12px 0px 0px;
 	z-index:10;
 }
 .wxBrowser_button_stop {
@@ -135,17 +137,17 @@
 	border-radius: 20px;
 	-moz-border-radius: 20px;
 	behavior: url(../ie-css3.php);
-	left:448px;
+	margin:0px 12px 0px 0px;
 	z-index:10;
 }
 .wxBrowser_url_field {
-	height:20px;
+	height:20px !important;
 	border:1px solid #545454;
 	border-radius: 20px;
 	-moz-border-radius: 20px;
 	behavior: url(../ie-css3.php);
 	padding:0px 0px 0px 30px;
-	left:114px;
+	margin:0px 12px 0px 0px;
 	z-index:10;
 	width:250px;
 }
@@ -153,7 +155,7 @@
 .wxBrowser_url_field input {
 	padding:0px 10px;
 	margin:0;
-	height:20px;
+	height:20px !important;
 	width:230px;
 	border-radius: 20px;
 	-moz-border-radius: 20px;
@@ -175,9 +177,10 @@
 
 .wxBrowser_iframe {
 	frameborder:0;
-	border:none;
+	border:0;
 	width:100%;
 	height:300px;
 	margin:0px;
+	padding:0;
 	scrolling:auto;
 }
