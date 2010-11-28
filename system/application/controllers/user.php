@@ -75,13 +75,13 @@ class User extends Controller {
               "click": "false",
               "list": {
                 "Hide": {
-                  "click": "WebX.dock.hide"
+                  "click": "WebX.Dock.hide"
                 },
                 "Show": {
-                  "click": "WebX.dock.show"
+                  "click": "WebX.Dock.show"
                 },
                 "Toggle": {
-                  "click": "WebX.dock.toggle"
+                  "click": "WebX.Dock.toggle"
                 }
               }
             }
@@ -99,13 +99,13 @@ class User extends Controller {
               "click": "false",
               "list": {
                 "Hide": {
-                  "click": "WebX.dock.hide"
+                  "click": "WebX.Dock.hide"
                 },
                 "Show": {
-                  "click": "WebX.dock.show"
+                  "click": "WebX.Dock.show"
                 },
                 "Toggle": {
-                  "click": "WebX.dock.toggle"
+                  "click": "WebX.Dock.toggle"
                 }
               }
             }

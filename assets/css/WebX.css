@@ -8,7 +8,7 @@ html,body {
   padding:0
 }
 
-body {
+body, #webxWrapper {
   background:#4169aa;
 }
 

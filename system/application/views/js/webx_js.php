@@ -81,9 +81,6 @@ function isUrl(s) {
 }
 </script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.js"></script>
-<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Clock.js"></script>
-<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Dock.js"></script>
-<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Menubar.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Window.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Browser.js"></script>
 <script type="text/javascript">

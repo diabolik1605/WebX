@@ -1,6 +1,6 @@
 WebX.Browser = function () {};
 WebX.Browser.prototype.create = function (site_url) {
-  WebX.menubar.switch_to('browser');
+  WebX.Menubar.switch_to('browser');
   console.log($('.wxBrowser').length);
   var this_id = $('.wxBrowser').length;
   var browser = $('<div/>', {
