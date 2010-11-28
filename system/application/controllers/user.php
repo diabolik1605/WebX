@@ -70,11 +70,20 @@ class User extends Controller {
             },
             "Prefrences": {
               "click": "false"
-            }
-          },
-          "Dock": {
-            "Toggle": {
-              "click": "WebX.dock.toggle"
+            },
+            "Dock": {
+              "click": "false",
+              "list": {
+                "Hide": {
+                  "click": "WebX.dock.hide"
+                },
+                "Show": {
+                  "click": "WebX.dock.show"
+                },
+                "Toggle": {
+                  "click": "WebX.dock.toggle"
+                }
+              }
             }
           }
         },
@@ -85,6 +94,20 @@ class User extends Controller {
             },
             "Prefrences": {
               "click": "false"
+            },
+            "Dock": {
+              "click": "false",
+              "list": {
+                "Hide": {
+                  "click": "WebX.dock.hide"
+                },
+                "Show": {
+                  "click": "WebX.dock.show"
+                },
+                "Toggle": {
+                  "click": "WebX.dock.toggle"
+                }
+              }
             }
           },
           "File": {

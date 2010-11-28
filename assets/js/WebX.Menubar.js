@@ -34,7 +34,7 @@ WebX.Menubar.prototype.create = function () {
     // 
   }
   // make finder menubar show
-  $(menubar).find('ul').not('#menubar_ul_finder').each(function(){
+  $(menubar).find('ul.menubar_ul').not('#menubar_ul_finder').each(function(){
     $(this).hide();
   });
 };
@@ -82,6 +82,22 @@ WebX.Menubar.prototype.create_panel = function (panel, contents, target) {
   }
 };
 
+WebX.Menubar.prototype.create_sub_panel = function (panel, contents, target) {
+  // console.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
+  var panel_name = panel + '_sub_panel';
+  
+  var mb_panel = $('<div>', {
+    id: panel_name,
+    className: "mbSubWindow"
+  }).appendTo(target);
+
+  var mb_link_ul = $('<ul>').appendTo(mb_panel);
+
+  for (var panel_link in contents) {
+    WebX.menubar.create_panel_link(panel_link, contents[panel_link], mb_link_ul);
+  }
+};
+
 WebX.Menubar.prototype.create_panel_link = function (link_name, link_funcs, target) {
   var mb_link_li = $('<li>', {
     text: link_name
@@ -97,6 +113,9 @@ WebX.Menubar.prototype.create_panel_link = function (link_name, link_funcs, targ
     mb_link_li.bind('click', function(){
       return false;
     });
+  }
+  if(link_funcs.list) {
+    WebX.menubar.create_sub_panel(link_name,link_funcs.list,mb_link_li);
   }
 };
 
