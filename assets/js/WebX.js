@@ -3,6 +3,7 @@ var WebX = {
     this.create = new WebX.Create();
     this.window = new WebX.Window();
     this.browser = new WebX.Browser();
+    this.finder = new WebX.Finder();
 
     var webx_wrapper = $('<div/>', {
       id: "webxWrapper"

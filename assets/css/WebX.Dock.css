@@ -85,6 +85,10 @@
   background: url("../imgs/dock/dock_sprite.png") 0 -126px no-repeat;
 }
 
+#dock_Finder {
+  background: url("../imgs/dock/dock_sprite.png") 0 -168px no-repeat;
+}
+
 /*--- DOCK TIPS---*/
 .wxTip {
   display: block;

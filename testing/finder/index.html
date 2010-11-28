@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <title>WebX Finder Test</title>
+
+<link rel="stylesheet" href="../../assets/css/WebX.css" type="text/css" media="screen" charset="utf-8">
+<link rel="stylesheet" href="./../assets/css/WebX.Finder.css" type="text/css" media="screen" charset="utf-8">
+<script type="text/javascript" src="../../assets/js/jquery-1.4.3.js"></script>
+<script type="text/javascript" src="../../assets/js/jquery-ui-1.8.6.custom.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.wxFinder').each(function(){
+			// get sizes and size content accordingly
+			$(this).data({
+				"windowHeight": $(this).height(),
+				"windowWidth": $(this).width(),
+				"topHeight": $(this).find('.wxFinder_top').height(),
+				"footerHeight": $(this).find('.wxFinder_footer').height(),
+				"contentHeight": ($(this).height() - ($(this).find('.wxFinder_top').height() + $(this).find('.wxFinder_footer').height() + 2))
+			});
+			var content_height = $(this).data('contentHeight');
+			$(this).find('.wxFinder_content').css({
+				"height": content_height + "px"
+			});
+			$(this).draggable({
+				containment: "#webxWrapper",
+		    stack: ".wx_window",
+		    zIndex: 10
+			}).resizable({
+			  alsoResize: ".finder_resize",
+		    minHeight: 135,
+		    minWidth: 300,
+		    handles: "se"
+			}).find('.ui-icon-gripsmall-diagonal-se').css({
+		    "position": "absolute",
+		    "bottom": "0px",
+		    "right": "0px",
+		    "width": "15px",
+		    "height": "20px",
+		    "z-index": 11
+		  });
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="webxWrapper">
+		<div class="wx_window wxFinder" id="wxFinder_0">
+		  <div class="wxFinder_top">
+		    <div class="wxFinder_top_permanents">
+		      <div class="wxFinder_buttons">
+		        <div class="button close">
+		        </div>
+		        <div class="button minimize">
+		        </div>
+		        <div class="button maximize">
+		        </div>
+		      </div>
+		      <div class="wxFinder_title">Finder</div>
+		    </div>
+		    <div class="wxFinder_nav">
+			
+		    </div>
+		  </div>
+			<div class="wxFinder_content finder_resize">
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+				<p>Content</p>
+			</div>
+			<div class="wxFinder_footer">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

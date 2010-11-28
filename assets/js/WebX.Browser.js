@@ -125,7 +125,7 @@ WebX.Browser.prototype.create = function (site_url) {
 		}
   });
   browser.draggable({
-		containment: document.getElementsByTagName('body')[0],
+		containment: '#webxWrapper',
     stack: ".wx_window",
     handle: browser_top,
     zIndex: 10

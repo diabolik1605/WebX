@@ -83,6 +83,7 @@ function isUrl(s) {
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Window.js"></script>
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Browser.js"></script>
+<script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Finder.js"></script>
 <script type="text/javascript">
 var webx_data;
 var dashboardStatus = 0;

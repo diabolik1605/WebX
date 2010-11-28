@@ -121,6 +121,10 @@ class User extends Controller {
         }
       },
     	"dock":{
+    		"finder":{
+    		    "name": "Finder",
+    		    "click": "WebX.finder.create"
+    		},
     		"dashboard":{
     		    "name": "Dashboard",
     		    "click": "wxDashInit"

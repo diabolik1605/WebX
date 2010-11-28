@@ -1,0 +1,102 @@
+.wxFinder {
+	position:absolute;
+	top:35px;
+	left:35px;
+	padding:0;
+	margin:0;
+	background:#ffffff;
+	border:1px solid rgba(155,155,155,1);
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	behavior: url(../ie-css3.php);
+	box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.5);
+	width:500px;
+	height:360px;
+	z-index:10;
+}
+
+.wxFinder_top {
+	width:100%;
+	height:60px;
+	position:relative;
+	background:#fcfcfc;
+	background: -moz-linear-gradient(top, #CBCBCB 0%, #A7A7A7 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#CBCBCB), color-stop(100%,#A7A7A7));
+	border-radius: 4px 4px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	behavior: url(../ie-css3.php);
+}
+
+.wxFinder_buttons {
+	left: 7px;
+ 	position: absolute;
+ 	top: 4px;
+ 	z-index:11;
+}
+.wxFinder_buttons div {
+	width:10px;
+  height:10px;
+  border-radius: 11px;
+  -moz-border-radius: 11px;
+  behavior: url(../ie-css3.php);
+  float:left;
+  padding: 0px;
+  margin: 0;
+  margin-right:7.35px;
+  border: 1px solid rgba(87, 94, 107, 0.85);
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.1));
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0.1)));
+  font: small-caps bold 10px/10px Lucida;
+  text-align:center;
+  cursor:default;
+}
+
+.wxFinder_top_permanents {
+	height:19.5px;
+	width:100%;
+	margin:0;
+	padding:0;
+	position:relative;
+}
+
+.wxFinder_title {
+	width:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	text-align:center;
+	color:#000000;
+}
+.wxFinder_nav {
+	position:relative;
+	height:30.5px;
+	margin:0;
+	padding:8px 0 0 0;
+	width:100%;
+}
+
+.wxFinder_nav div {
+	text-align:center;
+}
+
+.wxFinder_content {
+	width:100%;
+	border-top:1px solid rgba(81,81,81,1);
+	border-bottom:1px solid rgba(81,81,81,1);
+	color:#000000;
+	overflow:auto;
+}
+
+.wxFinder_footer {
+	width:100%;
+	height:23px;
+	background:#fcfcfc;
+	background: -moz-linear-gradient(top, #CBCBCB 0%, #A7A7A7 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#CBCBCB), color-stop(100%,#A7A7A7));
+	position:absolute;
+	bottom:0;
+	overflow:hidden;
+	text-align:center;
+	color:#000000;
+}
