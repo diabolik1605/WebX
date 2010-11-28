@@ -130,12 +130,11 @@ WebX.Browser.prototype.create = function (site_url) {
     handle: browser_top,
     zIndex: 10
 	}).resizable({
-	  alsoResize: ".browser_resize",
+	  alsoResize: "#wxBrowser_" + this_id + " .browser_resize",
     minHeight: 135,
     minWidth: 518,
     handles: "se"
-	});
-	browser.find('.ui-icon-gripsmall-diagonal-se').css({
+	}).find('.ui-icon-gripsmall-diagonal-se').css({
     "position": "absolute",
     "bottom": "0px",
     "right": "0px",

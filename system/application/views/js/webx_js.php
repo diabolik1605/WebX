@@ -836,6 +836,7 @@ $(window).bind('resize', function () {
 $(document).ready(function () {
   $.preload([
     '<?=base_url()?>assets/imgs/menubar/default_user.png',
+    '<?=base_url()?>assets/imgs/browser/buttons.png',
     '<?=$base_url?>assets/imgs/dock/dock_ends.png',
     '<?=$base_url?>assets/imgs/dock/dock_02.png',
     '<?=base_url()?>assets/imgs/dock/dock_sprite.png',
