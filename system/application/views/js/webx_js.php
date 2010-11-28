@@ -832,16 +832,6 @@ function toggleFolderDashboard(val) {
   }
 }
 
-function doSomething() {
-  // $('#contentbox').hover(function(){this.css('background','#ffffff');},function(){this.css('background','#666666');});
-  $('#starter').hide();
-  WebX.menubar.create();
-  WebX.dock.create();
-  // console.log(webx_data.userInfo);
-  // $('#contentbox').html("<a href='#' id='dynamic'>ooh dynamic!</a>");
-  // $('#dynamic').click(function(){  });
-  // $('#contentbox').removeChild($('#contentbox').getFirstChild());
-}
 $(window).bind('resize', function () {
   //windowResize();
 });
@@ -857,19 +847,18 @@ $(document).ready(function () {
     '<?=$base_url?>assets/imgs/dashboard/manage.png',
     '<?=base_url()?>assets/imgs/wallpaper/Vitrieth_by_iumazark.jpg'
     ], {
-    init: function (loaded, total) {
-      $("#starter").find('p').html("Loading...");
-    },
-    loaded: function (img, loaded, total) {
-      $("#starter").find('p').html("Loading...");
-    },
+    // init: function (loaded, total) {
+    //   $("#starter").find('p').html("Loading...");
+    // },
+    // loaded: function (img, loaded, total) {
+    //   $("#starter").find('p').html("Loading...");
+    // },
     loaded_all: function (loaded, total) {
-      $("#starter").find('p').html("Click to Start");
       $.post('<?=base_url()?>user/getDefaultSettings', function (data) {
         webx_data = data;
-        WebX.init();
+        $("#starter").find('p').html("Click to Start");
         $("#starter").click(function () {
-          doSomething();
+          WebX.init();
           return false;
         });
       });

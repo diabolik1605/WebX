@@ -1,0 +1,123 @@
+/*--- DOCK ---*/
+#wxDock {
+	height:58px;
+	position:absolute;
+	bottom:0;
+	margin:0;
+	padding:0;
+	left: 50%;
+	z-index: 999;
+}
+
+#wxDock_wrapper {
+	position:relative;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+}
+
+#wxDock_left {
+	position:absolute;
+	top:0;
+	left:-25px;
+	width: 25px;
+  height: 58px;
+  background: url("../imgs/dock/dock_ends.png") no-repeat 0 0;
+}
+
+#wxDock_right {
+	position:absolute;
+	top:0px;
+	right: -25px;
+	width: 25px;
+  height: 58px;
+  background: url("../imgs/dock/dock_ends.png") no-repeat -25px 0;
+}
+
+#wxDock_ul {
+	list-style-type:none;
+	padding:0 4px;
+	margin:0;
+	height:100%;
+	background: url("../imgs/dock/dock_02.png") repeat-x 0 0;
+}
+
+#wxDock_ul li {
+	float:left;
+	display:block;
+	height:100%;
+	margin:0 6px;
+	padding:0;
+	position:relative;
+}
+
+#wxDock_ul li div.wxTip {
+  display:none;
+}
+
+#wxDock_ul li div.moving,
+#wxDock_ul li:hover div.moving {
+  display:none !important;
+}
+
+#wxDock_ul li:hover div.wxTip {
+  display:block;
+}
+
+#dock_Dashboard {
+  background: url("../imgs/dock/dock_sprite.png") 0 0 no-repeat;
+}
+
+#dock_Files {
+  background: url("../imgs/dock/dock_sprite.png") 0 -42px no-repeat;
+}
+
+#dock_Settings {
+  background: url("../imgs/dock/dock_sprite.png") 0 -84px no-repeat;
+}
+
+#dock_Paste {
+  background: url("../imgs/dock/dock_sprite.png") 0 -42px no-repeat;
+}
+
+#dock_Browser {
+  background: url("../imgs/dock/dock_sprite.png") 0 -126px no-repeat;
+}
+
+/*--- DOCK TIPS---*/
+.wxTip {
+  display: block;
+  position: absolute;
+  z-index: 999;
+  height: 26px;
+  padding: 0;
+  top: -32px;
+  left: 50%;
+}
+
+.wxTipText {
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  background: rgba(30, 30, 30, 0.68);
+  height: 20px;
+  color: #fff;
+  font: 13px/20px "Myriad Pro", Geneva, helvetica;
+  margin: 0px;
+  padding: 0px 12px;
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+.wxTipText:after {
+  border-color:rgba(30, 30, 30, 0.68) transparent;
+  border-style:solid;
+  border-width:5px 5px 0;
+  bottom:-1px;
+  content:"";
+  display:block;
+  height:2px;
+  position:absolute;
+  width:0;
+  left:50%;
+  margin-left: -5px;
+}

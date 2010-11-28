@@ -17,8 +17,8 @@ WebX.Dock.prototype.create = function () {
     id: "wxDock_right"
   }).appendTo(theDock_wrapper);
 
-  for (var item in webx_data.dock.items) {
-    WebX.dock.create_icon(webx_data.dock.items[item]);
+  for (var item in webx_data.dock) {
+    WebX.dock.create_icon(webx_data.dock[item]);
   }
 
   // make sortable
@@ -39,38 +39,49 @@ WebX.Dock.prototype.create = function () {
 WebX.Dock.prototype.create_icon = function (item) {
   var dock_item = $('<li>', {
     className: 'wxDock_item',
-    id: 'wxDock_item_' + item
+    id: 'wxDock_item_' + item.name.replace(' ', '_')
   }).appendTo('#wxDock_ul');
 
   var icon_div = $('<div/>', {
     className: 'iIcon dockIcon',
-    id: 'dock_' + stCap(item)
+    id: 'dock_' + item.name
   }).appendTo(dock_item);
 
   $('<div/>', {
     className: "iGloss"
   }).appendTo(icon_div);
 
-  WebX.dock.create_icon_tip(dock_item, stCap(item));
+  WebX.dock.create_icon_tip(dock_item, item.name);
 
-  if (item === "dashboard") {
-    WebX.create.dashboard();
-    icon_div.bind('click', function () {
-      wxDashInit();
+  if(item.click !== 'false') {
+    var func = eval( "(" + item.click + ")" );
+    icon_div.bind('click', function(){
+      func();
       return false;
     });
-  } else if (item === "settings") {
-    icon_div.bind('click', function () {
-      WebX.window.toggle('#wxWindow_Settings');
-      return false;
-    });
-  } else if (item === "browser") {
-    icon_div.bind('click', function () {
-      WebX.browser.create();
-      WebX.menubar.switch_to('browser');
+  } else {
+    icon_div.bind('click', function(){
       return false;
     });
   }
+  
+  // if (item === "dashboard") {
+  //   icon_div.bind('click', function () {
+  //     wxDashInit();
+  //     return false;
+  //   });
+  // } else if (item === "settings") {
+  //   icon_div.bind('click', function () {
+  //     WebX.window.toggle('#wxWindow_Settings');
+  //     return false;
+  //   });
+  // } else if (item === "browser") {
+  //   icon_div.bind('click', function () {
+  //     WebX.browser.create();
+  //     WebX.menubar.switch_to('browser');
+  //     return false;
+  //   });
+  // }
   WebX.dock.center_dock();
 };
 

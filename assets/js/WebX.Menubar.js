@@ -78,43 +78,25 @@ WebX.Menubar.prototype.create_panel = function (panel, contents, target) {
   var mb_link_ul = $('<ul>').appendTo(mb_panel);
 
   for (var panel_link in contents) {
-    WebX.menubar.create_panel_link(panel, panel_link, mb_link_ul);
+    WebX.menubar.create_panel_link(panel_link, contents[panel_link], mb_link_ul);
   }
 };
 
-WebX.Menubar.prototype.create_panel_link = function (panel, link_name, target) {
+WebX.Menubar.prototype.create_panel_link = function (link_name, link_funcs, target) {
   var mb_link_li = $('<li>', {
     text: link_name
   }).appendTo(target);
-
-  // console.log(panel);
-  // console.log(link_name)
-
-  switch (panel) {
-  case "finder_Dock":
-    if (link_name === "Toggle") {
-      $(mb_link_li).bind('click', function () {
-        WebX.dock.toggle();
-        return false;
-      });
-    }
-    break;
-  case "browser_File":
-    switch (link_name) {
-    case "New Window":
-      $(mb_link_li).bind('click', function () {
-        WebX.browser.create();
-        return false;
-      });
-      break;
-    case "New Tab":
-      $(mb_link_li).bind('click', function () {
-        console.log("New Tab Clicked");
-        return false;
-      });
-      break;
-    }
-    break;
+  
+  if(link_funcs.click !== 'false') {
+    var func = eval( "(" + link_funcs.click + ")" );
+    mb_link_li.bind('click', function(){
+      func();
+      return false;
+    });
+  } else {
+    mb_link_li.bind('click', function(){
+      return false;
+    });
   }
 };
 

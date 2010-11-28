@@ -66,10 +66,10 @@ class User extends Controller {
         "finder": {
           "Start": {
             "About": {
-              "click": "return false"
+              "click": "false"
             },
             "Prefrences": {
-              "click": "return false"
+              "click": "false"
             }
           },
           "Dock": {
@@ -81,45 +81,43 @@ class User extends Controller {
         "browser": {
           "Start": {
             "About": {
-              "click": "return false"
+              "click": "false"
             },
             "Prefrences": {
-              "click": "return false"
+              "click": "false"
             }
           },
           "File": {
             "New Window": {
-              "click": "return false"
+              "click": "WebX.browser.create"
             },
             "New Tab": {
-              "click": "return false"
+              "click": "false"
             }
           }
         }
       },
     	"dock":{
-    		"items": [
-    		  "dashboard",
-    			"files",
-    			"paste",
-    			"browser",
-    			"settings"
-    		],
-    		"browser": {
-    		  "name": "Browser"
-    		},
-    		"settings":{
-    		    "name": "Settings"
-    		},
-    		"files":{
-    		    "name": "Files"
+    		"dashboard":{
+    		    "name": "Dashboard",
+    		    "click": "wxDashInit"
     		},
     		"paste":{
-    		    "name": "Paste"
+    		    "name": "Paste",
+    		    "click": "false"
     		},
-    		"dashboard":{
-    		    "name": "Dashboard"
-    		}		
+    		"files":{
+    		    "name": "Files",
+    		    "click": "false"
+    		},
+    		"browser": {
+    		  "name": "Browser",
+    		  "click": "WebX.browser.create"
+    		},
+    		"settings":{
+    		    "name": "Settings",
+    		    "click": "false"
+    		}
     	}
     }';
 		header('Cache-Control: no-cache, must-revalidate');
