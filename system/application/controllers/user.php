@@ -127,7 +127,7 @@ class User extends Controller {
     		},
     		"dashboard":{
     		    "name": "Dashboard",
-    		    "click": "wxDashInit"
+    		    "click": "WebX.Dashboard.start"
     		},
     		"paste":{
     		    "name": "Paste",

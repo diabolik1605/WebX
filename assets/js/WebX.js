@@ -14,7 +14,7 @@ var WebX = {
     $('#starter').hide();
     WebX.Menubar.init();
     WebX.Dock.init();
-    WebX.create.dashboard();
+    WebX.Dashboard.init();
     
     //windowResize();
   },
@@ -294,5 +294,109 @@ var WebX = {
         WebX.Dock.show();
       }
     }
+  },
+  Dashboard: {
+  	init: function () {
+  		$('<div>', {
+        id: "dashboardPanel"
+      }).data({
+        "dashboard_status": 0,
+        "widget_drawer_status": 0
+      }).appendTo(document.getElementsByTagName('body')[0]);
+
+      var dbOverlay = $('<div>', {
+        id: "dbOverlay",
+        click: function () {
+          WebX.Dashboard.start();
+          return false;
+        }
+      }).appendTo('div#webxWrapper');
+
+      $('<div>', {
+        id: "dbDrawerButton",
+        click: function () {
+          WebX.Dashboard.drawer();
+          return false;
+        }
+      }).appendTo(dbOverlay);
+      $('<div>', {
+        id: "dbManageButton"
+      }).appendTo(dbOverlay);
+  	},
+  	start: function () {
+  	  if ($('#dashboardPanel').data('dashboard_status') === 0) {
+        $("div#dbManageButton").hide();
+        $('div#dbOverlay').animate({
+          opacity: "toggle"
+        }, 420);
+        $('#dashboardPanel').data('dashboard_status', 1);
+      } else if ($('#dashboardPanel').data('dashboard_status') === 1 && $('#dashboardPanel').data('widget_drawer_status') === 1) {
+        $('div#webxWrapper, div#dbOverlay').animate({
+          marginTop: "0px"
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $("div#dbDrawerButton").animate({
+          rotate: '+=135deg'
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $("div#dbManageButton").animate({
+          opacity: 'toggle'
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $("div#dbOverlay").fadeOut(420);
+        $('#dashboardPanel').data('widget_drawer_status', 0);
+        $('#dashboardPanel').data('dashboard_status', 0);
+      } else if ($('#dashboardPanel').data('dashboard_status') === 1) {
+        $("div#dbOverlay").fadeOut(420);
+        $('#dashboardPanel').data('dashboard_status', 0);
+      }
+  	},
+  	drawer: function () {
+  	  if ($('#dashboardPanel').data('widget_drawer_status') === 0) {
+        $('div#webxWrapper, div#dbOverlay').animate({
+          marginTop: "-118px"
+        }, {
+          duration: 420
+        }, "linear");
+        $("div#dbDrawerButton").animate({
+          rotate: '-=135deg'
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $("div#dbManageButton").animate({
+          opacity: 'toggle'
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $('#dashboardPanel').data('widget_drawer_status', 1);
+      } else if ($('#dashboardPanel').data('widget_drawer_status') === 1) {
+        $('div#webxWrapper, div#dbOverlay').animate({
+          marginTop: "0px"
+        }, {
+          duration: 420
+        }, "linear");
+        $("div#dbDrawerButton").animate({
+          rotate: '+=135deg'
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $("div#dbManageButton").animate({
+          opacity: 'toggle'
+        }, {
+          queue: false,
+          duration: 420
+        });
+        $('#dashboardPanel').data('widget_drawer_status', 0);
+      }
+  	}
   }
 };
