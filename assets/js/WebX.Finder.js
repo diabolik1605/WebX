@@ -47,14 +47,6 @@ WebX.Finder.prototype.create = function () {
     className: "wxFinder_nav"
   }).appendTo(finder_top);
   
-  // Forward Button
-  $('<div/>',{
-    className: "wxFinder_button_forward"
-  }).appendTo(finder_nav).bind('click', function(){
-    console.log('forward button clicked');
-		return false;
-  });
-  
   // Back Button
   $('<div/>',{
     className: "wxFinder_button_back"
@@ -63,10 +55,43 @@ WebX.Finder.prototype.create = function () {
 		return false;
   });
   
-  // Views Nav
-  $('<ul/>',{
-    className: "wxFinder_views"
-  }).appendTo(finder_nav);
+  // Forward Button
+  $('<div/>',{
+    className: "wxFinder_button_forward"
+  }).appendTo(finder_nav).bind('click', function(){
+    console.log('forward button clicked');
+		return false;
+  });
+  
+  // Views
+  // Icon View
+  $('<div/>',{
+    className: "wxFinder_button_icon_view"
+  }).appendTo(finder_nav).bind('click', function(){
+    console.log('icon view button clicked');
+		return false;
+  });
+  // List View
+  $('<div/>',{
+    className: "wxFinder_button_list_view"
+  }).appendTo(finder_nav).bind('click', function(){
+    console.log('list view button clicked');
+		return false;
+  });
+  // Column View
+  $('<div/>',{
+    className: "wxFinder_button_column_view"
+  }).appendTo(finder_nav).bind('click', function(){
+    console.log('column view button clicked');
+		return false;
+  });
+  // Coverflow View
+  $('<div/>',{
+    className: "wxFinder_button_coverflow_view"
+  }).appendTo(finder_nav).bind('click', function(){
+    console.log('coverflow view button clicked');
+		return false;
+  });
   
   // Quicklook Button
   $('<div/>',{
@@ -109,7 +134,7 @@ WebX.Finder.prototype.create = function () {
 	}).resizable({
 	  alsoResize: "#wxFinder_" + this_id + " .finder_resize",
     minHeight: 135,
-    minWidth: 250,
+    minWidth: 500,
     handles: "se"
 	}).find('.ui-icon-gripsmall-diagonal-se').css({
     "position": "absolute",

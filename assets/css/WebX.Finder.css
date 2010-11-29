@@ -80,6 +80,105 @@
 	text-align:center;
 }
 
+.wxFinder_button_back {
+  width:25px;
+  height:20px;
+  border: 1px solid #555555;
+	background:#fcfcfc;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:0px 0px;
+  border-radius: 4px 0px 0px 4px;
+  -moz-border-radius: 4px 0px 0px 4px;
+  float:left;
+  margin:0px 0px 0px 8px;
+}
+.wxFinder_button_forward {
+  width:25px;
+  height:20px;
+  border-top: 1px solid #555555;
+  border-right: 1px solid #555555;
+  border-bottom: 1px solid #555555;
+	background:#fcfcfc;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:-26px 0px;
+  border-radius:0px 4px 4px 0px;
+  -moz-border-radius:0px 4px 4px 0px;
+  float:left;
+}
+
+.wxFinder_button_icon_view {
+  width:27px;
+  height:20px;
+  border: 1px solid #555555;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:-47px 0px;
+  border-radius: 4px 0px 0px 4px;
+  -moz-border-radius: 4px 0px 0px 4px;
+  float:left;
+  margin:0px 0px 0px 30px;
+}
+.wxFinder_button_list_view {
+  width:27px;
+  height:20px;
+  border-top: 1px solid #555555;
+  border-bottom: 1px solid #555555;
+  border-right: 1px solid #555555;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:-71px 0px;
+  float:left;
+}
+.wxFinder_button_column_view {
+  width:27px;
+  height:20px;
+  border-top: 1px solid #555555;
+  border-bottom: 1px solid #555555;
+  border-right: 1px solid #555555;
+	background:#fcfcfc;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:-99px 0px;
+  float:left;
+}
+.wxFinder_button_coverflow_view {
+  width:27px;
+  height:20px;
+  border-top: 1px solid #555555;
+  border-bottom: 1px solid #555555;
+  border-right: 1px solid #555555;
+	background:#fcfcfc;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:-125px 0px;
+	border-radius:0px 4px 4px 0px;
+  -moz-border-radius:0px 4px 4px 0px;
+  float:left;
+}
+
+.wxFinder_button_quicklook {
+  width:36px;
+  height:20px;
+  border: 1px solid #555555;
+	background:#fcfcfc;
+	background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #fcfcfc, #b0b0b0);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fcfcfc), to(#b0b0b0));
+	background-position:-146px 0px;
+	border-radius:4px;
+  -moz-border-radius:4px;
+  float:left;
+  margin:0px 0px 0px 30px;
+}
+
 .wxFinder_content {
 	width:365px;
 	margin:0px 0px 0px 136px;
