@@ -81,9 +81,22 @@
 }
 
 .wxFinder_content {
-	width:100%;
+	width:365px;
+	margin:0px 0px 0px 136px;
 	border-top:1px solid rgba(81,81,81,1);
 	border-bottom:1px solid rgba(81,81,81,1);
+	color:#000000;
+	overflow:auto;
+}
+
+.wxFinder_sidebar {
+  width:135px !important;
+  background: rgba(221, 228, 235, 1);
+  border-right:1px solid rgba(180, 180, 180, 1);
+  border-top:1px solid rgba(81,81,81,1);
+	border-bottom:1px solid rgba(81,81,81,1);
+	position:absolute;
+	top:0;
 	color:#000000;
 	overflow:auto;
 }

@@ -82,6 +82,11 @@ WebX.Finder.prototype.create = function () {
     id: "wxFinder_content_" + this_id
   }).appendTo(finder);
   
+  var finder_sidebar = $('<div/>', {
+    className: "wxFinder_sidebar finder_resize",
+    id: "wxFinder_sidebar_" + this_id
+  }).appendTo(finder);
+  
   // Footer
   var finder_footer = $('<div/>', {
     className: "wxFinder_footer"
@@ -89,6 +94,11 @@ WebX.Finder.prototype.create = function () {
 
 	finder_content.css({
 		"height": (finder.height() - (finder_top.height() + finder_footer.height() + 2)) + "px"
+	});
+	
+	finder_sidebar.css({
+		"height": (finder.height() - (finder_top.height() + finder_footer.height() + 2)) + "px",
+		"top": finder_top.height() + "px"
 	});
   
   finder.draggable({
