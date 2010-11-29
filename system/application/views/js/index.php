@@ -19,6 +19,7 @@
 <body>
   <div id="starter">
     <p style="margin-top:35px;cursor:default;">Loading...</p>
+    <div id="start_progress"></div>
   </div>
 </body>
 </html>

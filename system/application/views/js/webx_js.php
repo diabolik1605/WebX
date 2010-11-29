@@ -745,15 +745,18 @@ $(document).ready(function () {
     '<?=$base_url?>assets/imgs/dashboard/manage.png',
     '<?=base_url()?>assets/imgs/wallpaper/Vitrieth_by_iumazark.jpg'
     ], {
-    // init: function (loaded, total) {
-    //   $("#starter").find('p').html("Loading...");
-    // },
-    // loaded: function (img, loaded, total) {
-    //   $("#starter").find('p').html("Loading...");
-    // },
+    init: function (loaded, total) {
+      $("#start_progress").progressbar({ value: ((loaded/total) * 100) });
+      $("#starter").find('p').html("Loading...");
+    },
+    loaded: function (img, loaded, total) {
+      $("#start_progress").progressbar({ value: ((loaded/total) * 100) });
+      $("#starter").find('p').html("Loading...");
+    },
     loaded_all: function (loaded, total) {
       $.post('<?=base_url()?>user/getDefaultSettings', function (data) {
         webx_data = data;
+        $("#start_progress").progressbar({ value: ((loaded/total) * 100) }).fadeOut(210);
         $("#starter").find('p').html("Click to Start");
         $("#starter").click(function () {
           WebX.init();
