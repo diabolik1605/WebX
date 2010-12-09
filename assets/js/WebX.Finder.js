@@ -53,6 +53,10 @@ WebX.Finder.prototype.create = function () {
   }).appendTo(finder_nav).bind('click', function(){
     console.log('back button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
   
   // Forward Button
@@ -61,6 +65,10 @@ WebX.Finder.prototype.create = function () {
   }).appendTo(finder_nav).bind('click', function(){
     console.log('forward button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
   
   // Views
@@ -70,27 +78,46 @@ WebX.Finder.prototype.create = function () {
   }).appendTo(finder_nav).bind('click', function(){
     console.log('icon view button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
+  
   // List View
   $('<div/>',{
     className: "wxFinder_button_list_view"
   }).appendTo(finder_nav).bind('click', function(){
     console.log('list view button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
+  
   // Column View
   $('<div/>',{
     className: "wxFinder_button_column_view"
   }).appendTo(finder_nav).bind('click', function(){
     console.log('column view button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
+  
   // Coverflow View
   $('<div/>',{
     className: "wxFinder_button_coverflow_view"
   }).appendTo(finder_nav).bind('click', function(){
     console.log('coverflow view button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
   
   // Quicklook Button
@@ -99,6 +126,10 @@ WebX.Finder.prototype.create = function () {
   }).appendTo(finder_nav).bind('click', function(){
     console.log('quicklook button clicked');
 		return false;
+  }).bind('mousedown', function(){
+    $(this).addClass('finder_pressed');
+  }).bind('mouseup', function(){
+    $(this).removeClass('finder_pressed');
   });
   
   // Content

@@ -16,7 +16,7 @@
 
 .wxBrowser_top {
 	width:100%;
-	height:60px;
+	height:87px;
 	position:relative;
 	background:#fcfcfc;
 	background: -moz-linear-gradient(top, #CBCBCB 0%, #A7A7A7 100%);
@@ -24,7 +24,6 @@
 	border-radius: 4px 4px 0px 0px;
 	-moz-border-radius: 4px 4px 0px 0px;
 	behavior: url(../ie-css3.php);
-	border-bottom:1px solid rgba(81,81,81,1);
 }
 
 .wxBrowser_buttons {
@@ -69,10 +68,17 @@
 }
 .wxBrowser_nav {
 	position:relative;
-	height:30.5px;
+	height:33.5px;
 	margin:0;
 	padding:8px 0 0 0;
 	width:100%;
+}
+.wxBrowser_tabs_wrapper {
+  height:25px;
+  width:100%;
+  border-top:1px solid rgba(81,81,81,1);
+  border-bottom:1px solid rgba(81,81,81,1);
+  background:#8a8a8a;
 }
 
 .wxBrowser_nav div {
@@ -220,7 +226,7 @@
 	frameborder:0;
 	border:0;
 	width:100%;
-	height:300px;
+	height:274px;
 	margin:0px;
 	padding:0;
 	scrolling:auto;

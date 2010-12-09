@@ -141,8 +141,15 @@ class User extends Controller {
     		  "name": "Browser",
     		  "click": "WebX.browser.create"
     		},
-    		"settings":{
+    		"settings": {
     		    "name": "Settings",
+    		    "click": "false"
+    		},
+    		"separator": {
+    		  
+    		},
+    		"trash": {
+    		    "name": "Trash",
     		    "click": "false"
     		}
     	}

@@ -139,8 +139,8 @@ div.mbSubWindow {
 
 .mbWindow ul li:hover {
   color: #ffffff;
-  background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69, 72, 77, 0.4)), color-stop(100%,rgba(0, 0, 0, 0.4)));
+  background: -moz-linear-gradient(top, rgba(125,126,125,0.5) 0%, rgba(14,14,14,0.5) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,0.5)), color-stop(100%,rgba(14,14,14,0.5)));
 }
 
 .mbWindow ul li:hover div.mbSubWindow {

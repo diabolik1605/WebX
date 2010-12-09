@@ -86,17 +86,6 @@ function isUrl(s) {
 <script type="text/javascript" src="<?=base_url()?>assets/js/WebX.Finder.js"></script>
 <script type="text/javascript">
 var webx_data;
-var dashboardStatus = 0;
-var widgetDrawerStatus = 0;
-
-/*
-* method $ce(element)
-*	shortcut for document.createElement(element)
-*/
-
-function $ce(ele) {
-  return document.createElement(ele);
-}
 
 /*
 * method stCap(string)
@@ -313,22 +302,6 @@ WebX.Create.prototype.window = function (type, width, height, id, title, content
   return wx_window;
 };
 
-WebX.Create.prototype.login = function () {
-  var loginbox = $ce('div');
-  $(loginbox).attr('id', 'loginbox').css({
-    "width": "100%",
-    "height": "100%",
-    "background": "#737373",
-    "color": "#000",
-    "zIndex": "20"
-  }).html("<label for='user_nick'>Choose a Nickname</label><br /><input type='text' name='user_nick' id='nickname_input' /><br /><p><input type='button' value='Create User' id='registerSubmit'/></p>");
-  $('#webxWrapper').append(loginbox);
-  $('#registerSubmit').click(function () {
-    register();
-    return false;
-  });
-};
-
 function wxWindowPillExpand(ele) {
 var elements;
 switch($(ele).data('windowType')) {
@@ -497,103 +470,6 @@ function wxWindowPillToggle(ele) {
   }
 }
 
-function updateSettings() {
-  var settings = JSON.stringify(webx_data);
-  var newParams = {
-    "fb_uid": <?=$uid?> ,
-    "settings" : settings
-  };
-  var ajax = new Ajax();
-  ajax.responseType = Ajax.RAW;
-  ajax.ondone = function () {
-    console.log('webx_fb settings updated');
-  }
-  ajax.onerror = function () {
-    console.log("update settings ERROR!!");
-  };
-  ajax.post("<?=base_url().'user/updateSettings'?>", newParams);
-}
-
-function getSettings() {
-  var newParams = {
-    "fb_uid": <?=$uid?>
-  };
-  var ajax = new Ajax();
-  ajax.responseType = Ajax.JSON;
-  ajax.ondone = function (data) {
-    // console.log(data.content);
-    var newData = data.content;
-    newData = JSON.parse(newData);
-    console.log(newData);
-  }
-  ajax.onerror = function () {
-    console.log("get settings ERROR!!");
-  };
-  ajax.post("<?=base_url().'user/getSettings'?>", newParams);
-}
-
-function check() {
-  var json = JSON.stringify(webx_data);
-  console.log(json);
-  var jsoned = JSON.parse(json);
-  console.log(jsoned);
-}
-
-function register() {
-  var params = {
-    "facebook_uid": <?=$uid?>,
-    "first_name" : "<?=$userInfo['first_name']?>",
-    "last_name" : "<?=$userInfo['last_name']?>",
-    "image_url": "<?=$userInfo['pic_square']?>",
-    "user_nick": $("#nickname_input").val()
-  };
-  var ajax = new Ajax();
-  ajax.requireLogin = true;
-  ajax.responseType = Ajax.RAW;
-  ajax.ondone = function () {
-    console.log("new user : " + params.user_nick + " created.");
-    // updateSettings();
-    $('#loginbox').fadeOut().remove();
-  };
-  ajax.onerror = function () {
-    console.log("create user ERROR!!");
-  };
-  ajax.post("<?=base_url().'user/newUser'?>", params);
-}
-
-function login() {
-  var params = {
-    "fb_uid": <?=$uid?>
-  };
-  var ajax = new Ajax();
-  ajax.requireLogin = true;
-  ajax.responseType = Ajax.JSON;
-  ajax.ondone = function (data) {
-    var user_settings = JSON.parse(data.content);
-    console.log(user_settings);
-    $('#loginbox').fadeOut().remove();
-  };
-  ajax.onerror = function () {
-    console.log("LOGIN ERROR!!");
-  };
-  ajax.post("<?=base_url().'user/getSettings'?>", params);
-}
-
-function getUserId() {
-  var params = {
-    "fb_uid": <?=$uid?>
-  };
-  var ajax = new Ajax();
-  ajax.responseType = Ajax.RAW;
-  ajax.ondone = function (data) {
-    console.log(data);
-  };
-  ajax.onerror = function () {
-    console.log("LOGIN ERROR!!");
-  };
-  ajax.post("<?=base_url().'user/getUserId'?>", params);
-}
-
 function windowResize() {
   $('#wallpaper').parent().hide();
   var wallpaper_source = $('#wallpaper').attr('src');
@@ -740,10 +616,11 @@ $(document).ready(function () {
     '<?=$base_url?>assets/imgs/dock/dock_ends.png',
     '<?=$base_url?>assets/imgs/dock/dock_02.png',
     '<?=base_url()?>assets/imgs/dock/dock_sprite.png',
+    '<?=base_url()?>assets/imgs/dock/separator.png',
     '<?=$base_url?>assets/imgs/dashboard/dashBack.gif',
     '<?=$base_url?>assets/imgs/dashboard/widgetDrawer.png',
     '<?=$base_url?>assets/imgs/dashboard/manage.png',
-    '<?=base_url()?>assets/imgs/wallpaper/Vitrieth_by_iumazark.jpg'
+    '<?=base_url()?>assets/imgs/wallpaper/smhomerpollack2010.jpg'
     ], {
     init: function (loaded, total) {
       $("#start_progress").progressbar({ value: ((loaded/total) * 100) });

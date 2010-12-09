@@ -89,6 +89,10 @@ WebX.Browser.prototype.create = function (site_url) {
     console.log('stop button clicked');
 		return false;
   });
+  // browser tabs
+  var browser_tabs_wrapper = $('<div/>', {
+    className: "wxBrowser_tabs_wrapper"
+  }).appendTo(browser_top);
   // Iframe
   var browser_iframe = $('<iframe/>', {
     className: "wxBrowser_iframe browser_resize",

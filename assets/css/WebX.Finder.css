@@ -94,6 +94,10 @@
   float:left;
   margin:0px 0px 0px 8px;
 }
+.wxFinder_button_back.finder_pressed {
+	background-position:0px -20px;
+}
+
 .wxFinder_button_forward {
   width:25px;
   height:20px;
@@ -109,6 +113,9 @@
   -moz-border-radius:0px 4px 4px 0px;
   float:left;
 }
+.wxFinder_button_forward.finder_pressed {
+	background-position:-26px -20px;
+}
 
 .wxFinder_button_icon_view {
   width:27px;
@@ -123,6 +130,10 @@
   float:left;
   margin:0px 0px 0px 30px;
 }
+.wxFinder_button_icon_view.finder_pressed {
+	background-position:-47px -20px;
+}
+
 .wxFinder_button_list_view {
   width:27px;
   height:20px;
@@ -135,6 +146,10 @@
 	background-position:-71px 0px;
   float:left;
 }
+.wxFinder_button_list_view.finder_pressed {
+	background-position:-71px -20px;
+}
+
 .wxFinder_button_column_view {
   width:27px;
   height:20px;
@@ -148,6 +163,10 @@
 	background-position:-99px 0px;
   float:left;
 }
+.wxFinder_button_column_view.finder_pressed {
+	background-position:-99px -20px;
+}
+
 .wxFinder_button_coverflow_view {
   width:27px;
   height:20px;
@@ -163,6 +182,9 @@
   -moz-border-radius:0px 4px 4px 0px;
   float:left;
 }
+.wxFinder_button_coverflow_view.finder_pressed {
+	background-position:-125px -20px;
+}
 
 .wxFinder_button_quicklook {
   width:36px;
@@ -177,6 +199,19 @@
   -moz-border-radius:4px;
   float:left;
   margin:0px 0px 0px 30px;
+}
+.wxFinder_button_quicklook.finder_pressed {
+	background-position:-146px -20px;
+}
+
+.finder_pressed {
+  background:#747474;
+  background-image:url('../imgs/finder/buttons.png');
+	background-image:url('../imgs/finder/buttons.png'), -moz-linear-gradient(top, #424242, #747474);
+	background-image:url('../imgs/finder/buttons.png'), -webkit-gradient(linear, 0% 0%, 0% 100%, from(#424242), to(#747474));
+  -webkit-box-shadow: inset 0px 2px 6px rgba(0,0,0,0.6);
+  -moz-box-shadow: inset 0px 2px 6px rgba(0,0,0,0.6);
+  box-shadow: inset 0px 2px 6px rgba(0,0,0,0.6);
 }
 
 .wxFinder_content {

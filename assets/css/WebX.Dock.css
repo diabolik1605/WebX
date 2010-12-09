@@ -43,7 +43,7 @@
 	background: url("../imgs/dock/dock_02.png") repeat-x 0 0;
 }
 
-#wxDock_ul li {
+#wxDock_ul li.wxDock_item {
 	float:left;
 	display:block;
 	height:100%;
@@ -52,16 +52,26 @@
 	position:relative;
 }
 
-#wxDock_ul li div.wxTip {
+#wxDock_ul li.wxDock_separator {
+  float:left;
+	display:block;
+	height:100%;
+	margin:0 6px;
+	padding:0;
+	position:relative;
+}
+
+.dock_separator {
+  width:17px;
+  height:100%;
+  background:url("../imgs/dock/separator.png") 0 0 no-repeat;
+}
+
+#wxDock_ul li.wxDock_item div.wxTip {
   display:none;
 }
 
-#wxDock_ul li div.moving,
-#wxDock_ul li:hover div.moving {
-  display:none !important;
-}
-
-#wxDock_ul li:hover div.wxTip {
+#wxDock_ul li.wxDock_item:hover div.wxTip {
   display:block;
 }
 
@@ -87,6 +97,14 @@
 
 #dock_Finder {
   background: url("../imgs/dock/dock_sprite.png") 0 -168px no-repeat;
+}
+
+#dock_Trash {
+  background: url("../imgs/dock/dock_sprite.png") 0 -210px no-repeat;
+}
+
+#dock_Trash.full {
+  background: url("../imgs/dock/dock_sprite.png") 0 -252px no-repeat;
 }
 
 /*--- DOCK TIPS---*/

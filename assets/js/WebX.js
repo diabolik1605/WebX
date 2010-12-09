@@ -9,7 +9,7 @@ var WebX = {
       id: "webxWrapper"
     }).appendTo(document.getElementsByTagName('body')[0]);
     $('<div/>', {
-      innerHTML: '<img id="wallpaper" src="assets/imgs/wallpaper/Vitrieth_by_iumazark.jpg" alt="" title="" />'
+      innerHTML: '<img id="wallpaper" src="assets/imgs/wallpaper/smhomerpollack2010.jpg" alt="" title="" />'
     }).appendTo(webx_wrapper);
     $('#starter').hide();
     WebX.Menubar.init();
@@ -200,7 +200,11 @@ var WebX = {
       }).appendTo(theDock_wrapper);
 
       for (var item in webx_data.dock) {
-        WebX.Dock.create_icon(webx_data.dock[item]);
+        if(item !== "separator") {
+          WebX.Dock.create_icon(webx_data.dock[item]);
+        } else {
+          WebX.Dock.create_separator();
+        }
       }
 
       // make sortable
@@ -209,11 +213,9 @@ var WebX = {
         helper: 'clone',
         revert: true,
         tolerance: 'pointer',
+        cancel: '.wxDock_no_sort',
         start: function (event, ui) {
           $(ui.helper[0]).find('.wxTip').hide();
-        },
-        stop: function (event, ui) {
-          // $("#" + ui.item[0].id).find('.wxTip').removeClass('moving');
         }
       }).disableSelection();
     },
@@ -222,6 +224,10 @@ var WebX = {
         className: 'wxDock_item',
         id: 'wxDock_item_' + item.name.replace(' ', '_')
       }).appendTo('#wxDock_ul');
+      
+      if(item.name === "Trash") {
+        dock_item.addClass('wxDock_no_sort');
+      }
 
       var icon_div = $('<div/>', {
         className: 'iIcon dockIcon',
@@ -246,7 +252,7 @@ var WebX = {
         });
       }
 
-      WebX.Dock.center_dock();
+      WebX.Dock.center();
     },
     create_icon_tip: function (icon, text) {
       var tip_id = 'wxDock_tip_' + text;
@@ -267,7 +273,18 @@ var WebX = {
         "margin-left": '-' + tipPos + "px"
       });
     },
-    center_dock: function () {
+    create_separator: function () {
+      var dock_item = $('<li>', {
+        className: 'wxDock_separator wxDock_no_sort'
+      }).appendTo('#wxDock_ul');
+
+      var separator_div = $('<div/>', {
+        className: 'dock_separator'
+      }).appendTo(dock_item);
+
+      WebX.Dock.center();
+    },
+    center: function () {
       var dockWidth = getDimensions($('#wxDock')).width;
       $('#wxDock').css({
         "marginLeft": -(dockWidth / 2) + "px"
