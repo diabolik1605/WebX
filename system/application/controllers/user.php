@@ -14,8 +14,6 @@ class User extends Controller {
 		if(empty($error)) {
 			$data = array(
 				'facebook_uid' => $_POST['facebook_uid'],
-				'first_name' => $_POST['first_name'],
-				'last_name' => $_POST['last_name'],
 				'user_nick' => $_POST['user_nick'],
 				'image_url' => $_POST['image_url']
 			);
@@ -123,34 +121,88 @@ class User extends Controller {
     	"dock":{
     		"finder":{
     		    "name": "Finder",
-    		    "click": "WebX.finder.create"
+    		    "click": "WebX.finder.create",
+    		    "right_click": "function(){ console.log(\"finder right click\");}",
+    		    "right_click_menu": [{
+      		      "item": "New Finder Window",
+      		      "click": "function(){ console.log(\"New Finder window click\");}"
+      		    },
+      		    {
+      		      "item": "Hide",
+      		      "click": "function(){ console.log(\"Hide Finder click\");}"
+      		    }
+    		    ]
     		},
     		"dashboard":{
     		    "name": "Dashboard",
-    		    "click": "WebX.Dashboard.start"
+    		    "click": "WebX.Dashboard.start",
+    		    "right_click": "function(){ console.log(\"dashboard right click\");}",
+    		    "right_click_menu": [{
+      		      "item": "Show Dashboard",
+      		      "click": "function(){ console.log(\"Show Dashboard click\");}"
+      		    }
+    		    ]
     		},
     		"paste":{
     		    "name": "Paste",
-    		    "click": "false"
+    		    "click": "false",
+    		    "right_click": "function(){ console.log(\"paste right click\");}",
+    		    "right_click_menu": [{
+      		      "item": "Open",
+      		      "click": "function(){ console.log(\"Open Paste click\");}"
+      		    }
+    		    ]
     		},
     		"files":{
     		    "name": "Files",
-    		    "click": "false"
+    		    "click": "false",
+    		    "right_click": "function(){ console.log(\"files right click\");}",
+    		    "right_click_menu": [{
+      		      "item": "Open",
+      		      "click": "function(){ console.log(\"Open Files click\");}"
+      		    }
+    		    ]
     		},
     		"browser": {
     		  "name": "Browser",
-    		  "click": "WebX.browser.create"
+    		  "click": "WebX.browser.create",
+    		  "right_click": "function(){ console.log(\"browser right click\");}",
+  		    "right_click_menu": [{
+    		      "item": "New Window",
+    		      "click": "function(){ console.log(\"New Window Browser click\");}"
+    		    },
+    		    {
+    		      "item": "Hide",
+    		      "click": "function(){ console.log(\"Hide Browser click\");}"
+    		    }
+  		    ]
     		},
     		"settings": {
     		    "name": "Settings",
-    		    "click": "false"
+    		    "click": "false",
+    		    "right_click": "function(){ console.log(\"settings right click\");}",
+    		    "right_click_menu": [{
+      		      "item": "Open",
+      		      "click": "function(){ console.log(\"Open Settings click\");}"
+      		    }
+    		    ]
     		},
     		"separator": {
     		  
     		},
     		"trash": {
     		    "name": "Trash",
-    		    "click": "false"
+    		    "click": "false",
+    		    "right_click": "function(){ console.log(\"trash right click\");}",
+    		    "right_click_menu": [{
+      		      "item": "Open",
+      		      "click": "function(){ console.log(\"Open trash click\");}"
+      		    },
+      		    {
+      		      "item": "Empty Trash",
+      		      "click": "function(){ console.log(\"Empty Trash click\");}"
+      		    }
+    		    ]
     		}
     	}
     }';

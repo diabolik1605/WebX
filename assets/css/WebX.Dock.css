@@ -52,6 +52,56 @@
 	position:relative;
 }
 
+#wxDock_ul li.wxDock_item.right_clicked .dockIcon {
+  -webkit-box-shadow: inset 0px 0px 64px #000000;
+  -moz-box-shadow: inset 0px 0px 64px #000000;
+  box-shadow: inset 0px 0px 64px #000000;
+}
+
+#wxDock_ul li.wxDock_item .dock_context {
+  position:absolute;
+  top:0px;
+  left:-4px;
+  background:rgba(0,0,0,0.8);
+  color:#fff;
+  width:120px;
+  display:none;
+  border:2px solid rgba(255,255,255,0.7);
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+}
+
+#wxDock_ul li.wxDock_item .dock_context:before {
+	content:"";
+	display:block; /* reduce the damage in FF3.0 */
+	position:absolute;
+	bottom:-28px; /* value = - border-top-width - border-bottom-width */
+	left:11px; /* controls horizontal position */
+	width:0;
+	height:0;
+	border:13px solid transparent;
+	border-top-color:rgba(255,255,255,0.7);
+}
+
+/* creates the smaller  triangle */
+#wxDock_ul li.wxDock_item .dock_context:after {
+	content:"";
+	display:block; /* reduce the damage in FF3.0 */
+	position:absolute;
+	bottom:-24px; /* value = - border-top-width - border-bottom-width */
+	left:12px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+	width:0;
+	height:0;
+	border:12px solid transparent;
+	border-top-color:rgba(0,0,0,0.8);
+}
+
+
+#wxDock_ul li.wxDock_item.right_clicked .dock_context {
+  display:block;
+}
+
 #wxDock_ul li.wxDock_separator {
   float:left;
 	display:block;
@@ -73,6 +123,11 @@
 
 #wxDock_ul li.wxDock_item:hover div.wxTip {
   display:block;
+}
+
+#wxDock_ul li.wxDock_item.no_hover div.wxTip,
+#wxDock_ul li.wxDock_item.right_clicked div.wxTip {
+  display:none;
 }
 
 #dock_Dashboard {

@@ -29,7 +29,11 @@ WebX.Finder.prototype.create = function () {
   
   $('<div/>', {
     className: "button minimize"
-  }).appendTo(finder_top_button_box);
+  }).appendTo(finder_top_button_box).bind('click', function(){
+    console.log('minimize button clicked');
+    finder.hide("puff", {percent: 1}, 840);
+    WebX.Dock.create_minimized(finder.attr('id'),finder.attr('id'));
+  });
   
   $('<div/>', {
     className: "button maximize"

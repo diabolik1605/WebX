@@ -9,7 +9,7 @@ var WebX = {
       id: "webxWrapper"
     }).appendTo(document.getElementsByTagName('body')[0]);
     $('<div/>', {
-      innerHTML: '<img id="wallpaper" src="assets/imgs/wallpaper/smhomerpollack2010.jpg" alt="" title="" />'
+      innerHTML: '<img id="wallpaper" src="assets/imgs/wallpaper/The_Great_Wave.jpg" alt="" title="" />'
     }).appendTo(webx_wrapper);
     $('#starter').hide();
     WebX.Menubar.init();
@@ -219,11 +219,17 @@ var WebX = {
         }
       }).disableSelection();
     },
-    create_icon: function (item) {
+    create_icon: function (item,insert) {
       var dock_item = $('<li>', {
         className: 'wxDock_item',
         id: 'wxDock_item_' + item.name.replace(' ', '_')
       }).appendTo('#wxDock_ul');
+      
+      if(insert) {
+        $('#wxDock_item_Trash').before(dock_item);
+      } else {
+        dock_item.appendTo('#wxDock_ul');
+      }
       
       if(item.name === "Trash") {
         dock_item.addClass('wxDock_no_sort');
@@ -239,17 +245,51 @@ var WebX = {
       }).appendTo(icon_div);
 
       WebX.Dock.create_icon_tip(dock_item, item.name);
-
+      WebX.Dock.create_icon_context_menu(dock_item, item.right_click_menu);
+      
       if(item.click !== 'false') {
         var func = eval( "(" + item.click + ")" );
-        icon_div.bind('click', function(){
-          func();
+        var right_func = eval( "(" + item.right_click + ")" );
+        icon_div.bind('click', function(e){
+          if(dock_item.hasClass('right_clicked')) {
+            dock_item.removeClass('right_clicked');
+            $('li.wxDock_item').removeClass('no_hover');
+          } else {
+            func(); 
+          }
           return false;
         });
+        dock_item.rightClick(function(e){
+          if(dock_item.hasClass('right_clicked')) {
+            dock_item.removeClass('right_clicked');
+            $('li.wxDock_item').removeClass('no_hover');
+          } else {
+            right_func();
+            dock_item.addClass('right_clicked');
+            $('li.wxDock_item').not(dock_item).addClass('no_hover');
+          }
+  				return false;
+  			});
       } else {
+        var right_func = eval( "(" + item.right_click + ")" );
         icon_div.bind('click', function(){
+          if(dock_item.hasClass('right_clicked')) {
+            dock_item.removeClass('right_clicked');
+            $('li.wxDock_item').removeClass('no_hover');
+          }
           return false;
         });
+        dock_item.rightClick(function(e){
+          if(dock_item.hasClass('right_clicked')) {
+            dock_item.removeClass('right_clicked');
+            $('li.wxDock_item').removeClass('no_hover');
+          } else {
+            right_func();
+            dock_item.addClass('right_clicked');
+            $('li.wxDock_item').not(dock_item).addClass('no_hover');
+          }
+  				return false;
+  			});
       }
 
       WebX.Dock.center();
@@ -273,6 +313,22 @@ var WebX = {
         "margin-left": '-' + tipPos + "px"
       });
     },
+    create_minimized: function (name,item) {
+      console.log('creating minimized icon');
+      var item_name = String(name);
+      var item_id = '#wxDock_item_' + String(name);
+      var minimized_data = {
+		    "name": item_name,
+		    "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('"+item_id+"').remove(); WebX.Dock.center(); }",
+		    "right_click": "function(){ console.log(\"Minimized item right click\");}",
+		    "right_click_menu": [{
+  		      "item": "Open " + item_name,
+  		      "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('"+item_id+"').remove(); WebX.Dock.center(); }"
+  		    }
+		    ]
+  		}
+  		WebX.Dock.create_icon(minimized_data,true);
+    },
     create_separator: function () {
       var dock_item = $('<li>', {
         className: 'wxDock_separator wxDock_no_sort'
@@ -283,6 +339,33 @@ var WebX = {
       }).appendTo(dock_item);
 
       WebX.Dock.center();
+    },
+    create_icon_context_menu: function (icon, items) {
+      var context_menu = $('<div/>', {
+        className: "dock_context"
+      });
+      
+      var context_menu_ul = $('<ul/>',{
+        
+      }).appendTo(context_menu);
+      
+      for (item in items) {
+        var context_menu_item = WebX.Dock.create_icon_context_item(items[item]);
+        context_menu_ul.append(context_menu_item);
+      }
+      $(icon).append(context_menu);
+      context_menu.css({
+        "top": "-"+(context_menu.height() + 22)+"px"
+      });
+    },
+    create_icon_context_item: function (item) {
+      var func = eval( "(" + item.click + ")" );
+      return $('<li/>', {
+        innerHTML: item.item
+      }).bind('click', function () {
+        func();
+        return false;
+      });
     },
     center: function () {
       var dockWidth = getDimensions($('#wxDock')).width;

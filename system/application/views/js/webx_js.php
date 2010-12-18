@@ -620,7 +620,7 @@ $(document).ready(function () {
     '<?=$base_url?>assets/imgs/dashboard/dashBack.gif',
     '<?=$base_url?>assets/imgs/dashboard/widgetDrawer.png',
     '<?=$base_url?>assets/imgs/dashboard/manage.png',
-    '<?=base_url()?>assets/imgs/wallpaper/smhomerpollack2010.jpg'
+    '<?=base_url()?>assets/imgs/wallpaper/The_Great_Wave.jpg'
     ], {
     init: function (loaded, total) {
       $("#start_progress").progressbar({ value: ((loaded/total) * 100) });

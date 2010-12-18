@@ -13,6 +13,10 @@ WebX.Browser.prototype.create = function (site_url) {
   var browser_top_perms = $('<div/>', {
     className: "wxBrowser_top_permanents"
   }).appendTo(browser_top);
+  var browser_title = $('<div/>', {
+    className: "wxBrowser_title",
+    text: "Browse"
+  }).appendTo(browser_top_perms);
   var browser_top_button_box = $('<div/>', {
     className: "wxBrowser_buttons"
   }).appendTo(browser_top_perms);
@@ -24,17 +28,17 @@ WebX.Browser.prototype.create = function (site_url) {
   });
   $('<div/>', {
     className: "button minimize"
-  }).appendTo(browser_top_button_box);
+  }).appendTo(browser_top_button_box).bind('click', function(){
+    console.log('minimize button clicked');
+    browser.hide("puff", {percent: 1}, 840);
+    WebX.Dock.create_minimized(browser_title.html(),browser.attr('id'));
+  });
   $('<div/>', {
     className: "button maximize"
   }).appendTo(browser_top_button_box).bind('click', function(){
     console.log('maximize button clicked');
     WebX.browser.maximize(browser);
   });
-  var browser_title = $('<div/>', {
-    className: "wxBrowser_title",
-    text: "Browse"
-  }).appendTo(browser_top_perms);
   var browser_nav = $('<div/>', {
     className: "wxBrowser_nav"
   }).appendTo(browser_top);
@@ -113,6 +117,14 @@ WebX.Browser.prototype.create = function (site_url) {
 			history[history.length] = wxIframe_source;
 			loader_div.show();
 			browser_iframe.attr({'src': wxIframe_source }).data({ "history": history }).bind('load', function(){ loader_div.hide(); });
+			$.ajax({
+			  type: "POST",
+			  url: "browser/get_page_title",
+			  data: "url="+wxIframe_source,
+			  success: function(data) {
+			    browser_title.html(data);
+			  }
+			});
 		} else {
 			if(wxIframe_source.match(' ')) {
 				loader_div.show();
