@@ -225,13 +225,6 @@ var WebX = {
         id: 'wxDock_item_' + item.name.replace(' ', '_')
       });
       
-      if(insert) {
-        dock_item.attr({ "id": item.id });
-        $('#wxDock_item_Trash').before(dock_item);
-      } else {
-        dock_item.appendTo('#wxDock_ul');
-      }
-      
       if(item.name === "Trash") {
         dock_item.addClass('wxDock_no_sort');
       }
@@ -240,6 +233,14 @@ var WebX = {
         className: 'iIcon dockIcon',
         id: 'dock_' + item.name
       }).appendTo(dock_item);
+      
+      if(insert) {
+        dock_item.attr({ "id": item.id });
+        icon_div.attr({ "id": "dock_" + item.name.replace(/ /g,"_").replace(/'/g,"").replace(/-/g,"")})
+        $('#wxDock_item_Trash').before(dock_item);
+      } else {
+        dock_item.appendTo('#wxDock_ul');
+      }
 
       $('<div/>', {
         className: "iGloss"
@@ -296,14 +297,14 @@ var WebX = {
       WebX.Dock.center();
     },
     create_icon_tip: function (icon, text) {
-      var tip_id = 'wxDock_tip_' + text;
+      var tip_id = 'wxDock_tip_' + text.replace(/ /g,"_").replace(/'/g,"").replace(/-/g,"");
       var theTip = $('<div/>', {
         className: "wxTip",
         id: tip_id
       });
       $('<div/>', {
         className: "wxTipText",
-        text: text
+        innerHTML: text.replace(/ /g,"&nbsp;")
       }).appendTo(theTip);
 
       $(icon).append(theTip);
@@ -365,7 +366,7 @@ var WebX = {
     create_icon_context_item: function (item) {
       var func = eval( "(" + item.click + ")" );
       return $('<li/>', {
-        innerHTML: item.item
+        innerHTML: item.item.replace(/ /g,"&nbsp;")
       }).bind('click', function () {
         func();
         return false;
