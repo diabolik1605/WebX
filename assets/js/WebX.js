@@ -236,7 +236,7 @@ var WebX = {
       
       if(insert) {
         dock_item.attr({ "id": item.id });
-        icon_div.attr({ "id": "dock_" + item.name.replace(/ /g,"_").replace(/'/g,"").replace(/-/g,"")})
+        icon_div.attr({ "id": "dock_" + item.name.replace(/ /g,"_").replace(/'/g,"").replace(/’/g,"").replace(/-/g,"").replace(/\,/g,"").replace(/\./g,"")})
         $('#wxDock_item_Trash').before(dock_item);
       } else {
         dock_item.appendTo('#wxDock_ul');
@@ -297,7 +297,7 @@ var WebX = {
       WebX.Dock.center();
     },
     create_icon_tip: function (icon, text) {
-      var tip_id = 'wxDock_tip_' + text.replace(/ /g,"_").replace(/'/g,"").replace(/-/g,"");
+      var tip_id = 'wxDock_tip_' + text.replace(/ /g,"_").replace(/'/g,"").replace(/’/g,"").replace(/-/g,"").replace(/\,/g,"").replace(/\./g,"");
       var theTip = $('<div/>', {
         className: "wxTip",
         id: tip_id
