@@ -223,9 +223,10 @@ var WebX = {
       var dock_item = $('<li>', {
         className: 'wxDock_item',
         id: 'wxDock_item_' + item.name.replace(' ', '_')
-      }).appendTo('#wxDock_ul');
+      });
       
       if(insert) {
+        dock_item.attr({ "id": item.id });
         $('#wxDock_item_Trash').before(dock_item);
       } else {
         dock_item.appendTo('#wxDock_ul');
@@ -315,15 +316,18 @@ var WebX = {
     },
     create_minimized: function (name,item) {
       console.log('creating minimized icon');
+      console.log('name : ' + name);
+      console.log('item : ' + item);
       var item_name = String(name);
-      var item_id = '#wxDock_item_' + String(name);
+      var item_id = 'wxDock_item_' + String(item);
       var minimized_data = {
 		    "name": item_name,
-		    "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('"+item_id+"').remove(); WebX.Dock.center(); }",
+		    "id": item_id,
+		    "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('#"+item_id+"').remove(); WebX.Dock.center(); }",
 		    "right_click": "function(){ console.log(\"Minimized item right click\");}",
 		    "right_click_menu": [{
   		      "item": "Open " + item_name,
-  		      "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('"+item_id+"').remove(); WebX.Dock.center(); }"
+  		      "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('#"+item_id+"').remove(); WebX.Dock.center(); }"
   		    }
 		    ]
   		}
