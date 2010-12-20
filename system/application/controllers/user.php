@@ -83,6 +83,17 @@ class User extends Controller {
                 }
               }
             }
+          },
+          "Finder": {
+            "About Finder...": {
+              "click": "function(){ return false; }"
+            },
+            "Hide Finder": {
+              "click": "function(){ return false; }"
+            },
+            "Hide Others": {
+              "click": "function(){ return false; }"
+            }
           }
         },
         "browser": {
@@ -108,6 +119,20 @@ class User extends Controller {
               }
             }
           },
+          "Browser": {
+            "About Browser...": {
+              "click": "function(){ return false; }"
+            },
+            "Hide Browser": {
+              "click": "function(){ return false; }"
+            },
+            "Hide Others": {
+              "click": "function(){ return false; }"
+            },
+            "Quit Browser": {
+              "click": "function(){ return false; }"
+            }
+          },
           "File": {
             "New Window": {
               "click": "WebX.browser.create"
@@ -122,68 +147,68 @@ class User extends Controller {
     		"finder":{
     		    "name": "Finder",
     		    "click": "WebX.finder.create",
-    		    "right_click": "function(){ console.log(\"finder right click\");}",
+    		    "right_click": "function(){ debug.log(\"finder right click\");}",
     		    "right_click_menu": [{
       		      "item": "New Finder Window",
-      		      "click": "function(){ console.log(\"New Finder window click\");}"
+      		      "click": "function(){ debug.log(\"New Finder window click\");}"
       		    },
       		    {
       		      "item": "Hide",
-      		      "click": "function(){ console.log(\"Hide Finder click\");}"
+      		      "click": "function(){ debug.log(\"Hide Finder click\");}"
       		    }
     		    ]
     		},
     		"dashboard":{
     		    "name": "Dashboard",
     		    "click": "WebX.Dashboard.start",
-    		    "right_click": "function(){ console.log(\"dashboard right click\");}",
+    		    "right_click": "function(){ debug.log(\"dashboard right click\");}",
     		    "right_click_menu": [{
       		      "item": "Show Dashboard",
-      		      "click": "function(){ console.log(\"Show Dashboard click\");}"
+      		      "click": "function(){ $(\"#wxDock_item_Dashboard\").find(\".iIcon\").click(); WebX.Dashboard.start(); }"
       		    }
     		    ]
     		},
     		"paste":{
     		    "name": "Paste",
     		    "click": "false",
-    		    "right_click": "function(){ console.log(\"paste right click\");}",
+    		    "right_click": "function(){ debug.log(\"paste right click\");}",
     		    "right_click_menu": [{
       		      "item": "Open",
-      		      "click": "function(){ console.log(\"Open Paste click\");}"
+      		      "click": "function(){ debug.log(\"Open Paste click\");}"
       		    }
     		    ]
     		},
     		"files":{
     		    "name": "Files",
     		    "click": "false",
-    		    "right_click": "function(){ console.log(\"files right click\");}",
+    		    "right_click": "function(){ debug.log(\"files right click\");}",
     		    "right_click_menu": [{
       		      "item": "Open",
-      		      "click": "function(){ console.log(\"Open Files click\");}"
+      		      "click": "function(){ debug.log(\"Open Files click\");}"
       		    }
     		    ]
     		},
     		"browser": {
     		  "name": "Browser",
     		  "click": "WebX.browser.create",
-    		  "right_click": "function(){ console.log(\"browser right click\");}",
+    		  "right_click": "function(){ debug.log(\"browser right click\");}",
   		    "right_click_menu": [{
     		      "item": "New Window",
-    		      "click": "function(){ console.log(\"New Window Browser click\");}"
+    		      "click": "function(){ debug.log(\"New Window Browser click\");}"
     		    },
     		    {
     		      "item": "Hide",
-    		      "click": "function(){ console.log(\"Hide Browser click\");}"
+    		      "click": "function(){ debug.log(\"Hide Browser click\");}"
     		    }
   		    ]
     		},
     		"settings": {
     		    "name": "Settings",
     		    "click": "false",
-    		    "right_click": "function(){ console.log(\"settings right click\");}",
+    		    "right_click": "function(){ debug.log(\"settings right click\");}",
     		    "right_click_menu": [{
       		      "item": "Open",
-      		      "click": "function(){ console.log(\"Open Settings click\");}"
+      		      "click": "function(){ debug.log(\"Open Settings click\");}"
       		    }
     		    ]
     		},
@@ -193,14 +218,14 @@ class User extends Controller {
     		"trash": {
     		    "name": "Trash",
     		    "click": "false",
-    		    "right_click": "function(){ console.log(\"trash right click\");}",
+    		    "right_click": "function(){ debug.log(\"trash right click\");}",
     		    "right_click_menu": [{
       		      "item": "Open",
-      		      "click": "function(){ console.log(\"Open trash click\");}"
+      		      "click": "function(){ debug.log(\"Open trash click\");}"
       		    },
       		    {
       		      "item": "Empty Trash",
-      		      "click": "function(){ console.log(\"Empty Trash click\");}"
+      		      "click": "function(){ debug.log(\"Empty Trash click\");}"
       		    }
     		    ]
     		}

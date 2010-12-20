@@ -642,5 +642,14 @@ $(document).ready(function () {
       });
     }
   });
+  
+  if(typeof(console) !== 'undefined' && console != null) {
+    var console = {
+      log: function (args) {
+        
+      }
+    }
+  }
+  
 });
 </script>

@@ -27,7 +27,7 @@ function $(selector) {
 			var thisTag = selMatch[0].toLowerCase();
 			var validTags =["a","body","div","form","h1","h2","h3","h4","h5","h6","img","input","ol","pre","p","select","table","td","textarea","th","tr","ul"];
 			if(inArray(thisTag, validTags)){
-				// console.log(match);
+				// debug.log(match);
 			}
 		}
 		var selectorIdent = match[1];

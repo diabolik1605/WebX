@@ -4,7 +4,7 @@ var WebX = {
     this.window = new WebX.Window();
     this.browser = new WebX.Browser();
     this.finder = new WebX.Finder();
-
+    
     var webx_wrapper = $('<div/>', {
       id: "webxWrapper"
     }).appendTo(document.getElementsByTagName('body')[0]);
@@ -126,7 +126,7 @@ var WebX = {
       WebX.Menubar.create_panel(obj,webx_data.menubar[names[0]][names[1]],menubar_li);
     },
     create_panel: function (panel, contents, target) {
-      // console.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
+      // debug.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
       var panel_name = panel + '_panel';
 
       var mb_panel = $('<div>', {
@@ -141,7 +141,7 @@ var WebX = {
       }
     },
     create_sub_panel: function (panel, contents, target) {
-      // console.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
+      // debug.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
       var panel_name = panel + '_sub_panel';
 
       var mb_panel = $('<div>', {
@@ -227,6 +227,12 @@ var WebX = {
       
       if(item.name === "Trash") {
         dock_item.addClass('wxDock_no_sort');
+        dock_item.droppable({
+          accept: ".wx_window",
+        	drop: function( event, ui ) {
+            $('#dock_Trash').addClass('full');
+          }
+        });
       }
 
       var icon_div = $('<div/>', {
@@ -316,16 +322,16 @@ var WebX = {
       });
     },
     create_minimized: function (name,item) {
-      console.log('creating minimized icon');
-      console.log('name : ' + name);
-      console.log('item : ' + item);
+      debug.log('creating minimized icon');
+      debug.log('name : ' + name);
+      debug.log('item : ' + item);
       var item_name = String(name);
       var item_id = 'wxDock_item_' + String(item);
       var minimized_data = {
 		    "name": item_name,
 		    "id": item_id,
 		    "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('#"+item_id+"').remove(); WebX.Dock.center(); }",
-		    "right_click": "function(){ console.log(\"Minimized item right click\");}",
+		    "right_click": "function(){ debug.log(\"Minimized item right click\");}",
 		    "right_click_menu": [{
   		      "item": "Open " + item_name,
   		      "click": "function(){ $('#"+item+"').show('puff', {percent: 100}, 840); $('#"+item_id+"').remove(); WebX.Dock.center(); }"
@@ -503,5 +509,12 @@ var WebX = {
         $('#dashboardPanel').data('widget_drawer_status', 0);
       }
   	}
+  },
+  Data: {
+    windows: {
+      finder: [],
+      browser: []
+    },
+    menubars: []
   }
 };

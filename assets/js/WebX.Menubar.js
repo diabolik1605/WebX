@@ -65,7 +65,7 @@ WebX.Menubar = {
     WebX.Menubar.create_panel(obj,webx_data.menubar[names[0]][names[1]],menubar_li);
   },
   create_panel: function (panel, contents, target) {
-    // console.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
+    // debug.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
     var panel_name = panel + '_panel';
 
     var mb_panel = $('<div>', {
@@ -80,7 +80,7 @@ WebX.Menubar = {
     }
   },
   create_sub_panel: function (panel, contents, target) {
-    // console.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
+    // debug.log(panel+" panel: "+webx_data.menubar.panels[panel]+" - left: "+webx_data.menubar.panels[panel].styles.left);
     var panel_name = panel + '_sub_panel';
 
     var mb_panel = $('<div>', {

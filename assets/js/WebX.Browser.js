@@ -1,12 +1,14 @@
 WebX.Browser = function () {};
 WebX.Browser.prototype.create = function (site_url) {
   WebX.Menubar.switch_to('browser');
-  console.log($('.wxBrowser').length);
-  var this_id = $('.wxBrowser').length;
+  var this_id = WebX.Data.windows['browser'].length;
   var browser = $('<div/>', {
     className: "wx_window wxBrowser",
     id: "wxBrowser_" + this_id
   }).appendTo('#webxWrapper');
+  
+  WebX.Data.windows['browser'].push("wxBrowser_" + this_id);
+  
   var browser_top = $('<div/>', {
     className: "wxBrowser_top"
   }).appendTo(browser);
@@ -23,20 +25,20 @@ WebX.Browser.prototype.create = function (site_url) {
   $('<div/>', {
     className: "button close"
   }).appendTo(browser_top_button_box).bind('click', function(){
-    console.log('close button clicked');
+    debug.log('close button clicked');
     WebX.browser.toggle(browser);
   });
   $('<div/>', {
     className: "button minimize"
   }).appendTo(browser_top_button_box).bind('click', function(){
-    console.log('minimize button clicked');
+    debug.log('minimize button clicked');
     browser.hide("puff", {percent: 1}, 840);
     WebX.Dock.create_minimized(browser_title.html(),browser.attr('id'));
   });
   $('<div/>', {
     className: "button maximize"
   }).appendTo(browser_top_button_box).bind('click', function(){
-    console.log('maximize button clicked');
+    debug.log('maximize button clicked');
     WebX.browser.maximize(browser);
   });
   var browser_nav = $('<div/>', {
@@ -46,21 +48,21 @@ WebX.Browser.prototype.create = function (site_url) {
   $('<div/>',{
     className: "wxBrowser_button_forward"
   }).appendTo(browser_nav).bind('click', function(){
-    console.log('forward button clicked');
+    debug.log('forward button clicked');
 		return false;
   });
   // Back Button
   $('<div/>',{
     className: "wxBrowser_button_back"
   }).appendTo(browser_nav).bind('click', function(){
-    console.log('back button clicked');
+    debug.log('back button clicked');
 		return false;
   });
   // Home Button
   $('<div/>',{
     className: "wxBrowser_button_home"
   }).appendTo(browser_nav).bind('click', function(){
-    console.log('home button clicked');
+    debug.log('home button clicked');
 		return false;
   });
   // Url Form
@@ -83,14 +85,14 @@ WebX.Browser.prototype.create = function (site_url) {
   $('<div/>',{
     className: "wxBrowser_button_refresh"
   }).appendTo(browser_nav).bind('click', function(){
-    console.log('refresh button clicked');
+    debug.log('refresh button clicked');
 		return false;
   });
   // Stop Button
   $('<div/>',{
     className: "wxBrowser_button_stop"
   }).appendTo(browser_nav).bind('click', function(){
-    console.log('stop button clicked');
+    debug.log('stop button clicked');
 		return false;
   });
   // browser tabs
@@ -136,7 +138,7 @@ WebX.Browser.prototype.create = function (site_url) {
 				loader_div.show();
 				browser_iframe.attr({'src': browser_iframe.data('home') }).data({ "history": history }).bind('load', function(){ loader_div.hide(); });
 				browser_input.attr({'value': browser_iframe.attr('src')});
-				console.log(history);
+				debug.log(history);
 			}
 		}
   });
@@ -144,7 +146,10 @@ WebX.Browser.prototype.create = function (site_url) {
 		containment: '#webxWrapper',
     stack: ".wx_window",
     handle: browser_top,
-    zIndex: 10
+    zIndex: 10,
+    start: function(event, ui) {
+      WebX.Menubar.switch_to('browser');
+    }
 	}).resizable({
 	  alsoResize: "#wxBrowser_" + this_id + " .browser_resize",
     minHeight: 135,

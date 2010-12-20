@@ -212,6 +212,11 @@
 	-moz-box-shadow: inset 0px 1px 2px #000000;
 	box-shadow: inset 0px 1px 2px #000000;
 }
+
+.wxBrowser_url_field input:focus {
+  outline: none;
+}
+
 .wxBrowser_loader {
 	background:transparent;
 	width:16px;

@@ -1,12 +1,13 @@
 WebX.Finder = function () {};
 WebX.Finder.prototype.create = function () {
   WebX.Menubar.switch_to('finder');
-  console.log($('.wxFinder').length);
-  var this_id = $('.wxFinder').length;
+  var this_id = WebX.Data.windows['finder'].length;
   var finder = $('<div/>', {
     className: "wx_window wxFinder",
     id: "wxFinder_" + this_id
   }).appendTo('#webxWrapper');
+  
+  WebX.Data.windows['finder'].push("wxFinder_" + this_id);
   
   var finder_top = $('<div/>', {
     className: "wxFinder_top"
@@ -23,14 +24,14 @@ WebX.Finder.prototype.create = function () {
   $('<div/>', {
     className: "button close"
   }).appendTo(finder_top_button_box).bind('click', function(){
-    console.log('close button clicked');
+    debug.log('close button clicked');
     WebX.finder.toggle(finder);
   });
   
   $('<div/>', {
     className: "button minimize"
   }).appendTo(finder_top_button_box).bind('click', function(){
-    console.log('minimize button clicked');
+    debug.log('minimize button clicked');
     finder.hide("puff", {percent: 1}, 840);
     WebX.Dock.create_minimized(finder.attr('id'),finder.attr('id'));
   });
@@ -38,7 +39,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>', {
     className: "button maximize"
   }).appendTo(finder_top_button_box).bind('click', function(){
-    console.log('maximize button clicked');
+    debug.log('maximize button clicked');
     WebX.Finder.maximize(finder);
   });
   
@@ -55,7 +56,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_back"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('back button clicked');
+    debug.log('back button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -67,7 +68,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_forward"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('forward button clicked');
+    debug.log('forward button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -80,7 +81,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_icon_view"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('icon view button clicked');
+    debug.log('icon view button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -92,7 +93,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_list_view"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('list view button clicked');
+    debug.log('list view button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -104,7 +105,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_column_view"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('column view button clicked');
+    debug.log('column view button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -116,7 +117,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_coverflow_view"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('coverflow view button clicked');
+    debug.log('coverflow view button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -128,7 +129,7 @@ WebX.Finder.prototype.create = function () {
   $('<div/>',{
     className: "wxFinder_button_quicklook"
   }).appendTo(finder_nav).bind('click', function(){
-    console.log('quicklook button clicked');
+    debug.log('quicklook button clicked');
 		return false;
   }).bind('mousedown', function(){
     $(this).addClass('finder_pressed');
@@ -165,7 +166,10 @@ WebX.Finder.prototype.create = function () {
 		containment: '#webxWrapper',
     stack: ".wx_window",
     handle: finder_top,
-    zIndex: 10
+    zIndex: 10,
+    start: function(event, ui) {
+      WebX.Menubar.switch_to('finder');
+    }
 	}).resizable({
 	  alsoResize: "#wxFinder_" + this_id + " .finder_resize",
     minHeight: 135,
